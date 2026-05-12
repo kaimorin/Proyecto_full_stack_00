@@ -2,7 +2,13 @@ package com.proyecto.login.model;
 
 
 import jakarta.persistence.*;
-
+import lombok.*;
+@Entity
+@NoArgsConstructor
+@Table(name = "users")
+@AllArgsConstructor
+@Getter
+@Setter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

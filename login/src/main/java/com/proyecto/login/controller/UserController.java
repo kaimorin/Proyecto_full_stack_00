@@ -1,5 +1,58 @@
 package com.proyecto.login.controller;
+import com.proyecto.login.Service.UserService;
+import com.proyecto.login.dto.ApiResponse;
+import com.proyecto.login.dto.UserCredentialsDTO;
+import com.proyecto.login.dto.UserDTO;
+import com.proyecto.login.model.User;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/users")
 public class UserController {
 
+    private final UserService userService;
+
+    
+    @PostMapping("/register")
+    public ResponseEntity<ApiResponse<UserDTO>> register(@Valid @RequestBody UserCredentialsDTO dto) {
+        User newUser = userService.registerUser(dto.getUsername(), dto.getPassword());
+        UserDTO userDTO = new UserDTO(newUser.getId(), newUser.getUsername());
+
+        ApiResponse<UserDTO> response =
+                new ApiResponse<>(200, "Usuario registrado correctamente", userDTO);
+
+        return ResponseEntity.ok(response);
+    }
+
+   
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<String>> login(@Valid @RequestBody UserCredentialsDTO dto) {
+        boolean success = userService.login(dto.getUsername(), dto.getPassword());
+
+        if (success) {
+            ApiResponse<String> response =
+                    new ApiResponse<>(200, "Login exitoso", "Bienvenido " + dto.getUsername());
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<String> response =
+                    new ApiResponse<>(401, "Credenciales inválidas", null);
+            return ResponseEntity.status(401).body(response);
+        }
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<ApiResponse<List<UserDTO>>> getAllUsers() {
+        List<UserDTO> users = userService.getAllUsersDTO();
+        ApiResponse<List<UserDTO>> response =
+                new ApiResponse<>(200, "Listado de usuarios", users);
+        return ResponseEntity.ok(response);
+    }
 }
