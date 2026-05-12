@@ -1,7 +1,7 @@
 package com.proyecto.asistencia.controller;
 
 import com.proyecto.asistencia.service.AsistenciaService;
-import com.proyecto.asistencia.dto.ApiResponse;
+import com.proyecto.login.dto.ApiResponse;
 import com.proyecto.asistencia.dto.AsistenciaDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

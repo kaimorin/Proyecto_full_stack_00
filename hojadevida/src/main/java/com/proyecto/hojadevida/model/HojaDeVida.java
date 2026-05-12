@@ -1,4 +1,4 @@
-package com.proyecto.hojavida.model;
+package com.proyecto.hojadevida.model;
 
 import java.sql.Date;
 import jakarta.persistence.Column;
