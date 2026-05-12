@@ -10,31 +10,31 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor // Lombok genera constructor con los campos final
+@RequiredArgsConstructor
 public class UserService {
 
     private final RepositoryUser repositoryUser;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    // Registrar usuario con contraseña encriptada
+    
     public User registerUser(String username, String rawPassword) {
-        // Verificar si el usuario ya existe
+       
         if (repositoryUser.findByUsername(username).isPresent()) {
-            throw new IllegalArgumentException("El usuario '" + username + "' ya existe");
+            throw new IllegalArgumentException("El usuario con este user: " + username + " ya existe actualmente");
         }
 
         String encodedPassword = passwordEncoder.encode(rawPassword);
-        User user = new User(null, username, encodedPassword);
+        User user = new User(null, username, encodedPassword,null);
         return repositoryUser.save(user);
     }
 
-    // Validar login
+   
     public boolean login(String username, String rawPassword) {
         Optional<User> userOpt = repositoryUser.findByUsername(username);
         return userOpt.isPresent() && passwordEncoder.matches(rawPassword, userOpt.get().getPassword());
     }
 
-    // Listar todos los usuarios
+    
     public List<UserDTO> getAllUsersDTO() {
         return repositoryUser.findAll()
                 .stream()
