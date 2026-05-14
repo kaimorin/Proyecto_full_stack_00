@@ -18,11 +18,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    
-    @ManyToOne(fetch = FetchType.LAZY) 
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idrol_user") 
-    private long rol_id_user;
-
+    private Rol rol; 
 
 
 
