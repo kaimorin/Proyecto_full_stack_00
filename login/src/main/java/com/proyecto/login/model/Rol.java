@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
-@Table (name="rol")
+@Table (name="roles")
 @Getter
 @Setter
 @NoArgsConstructor
