@@ -1,5 +1,7 @@
 package com.proyecto.asistencia.repository;
 
-public interface AsistenciaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.proyecto.asistencia.model.Asistencia;
 
+public interface AsistenciaRepository extends JpaRepository<Asistencia, Long> {
 }
