@@ -2,7 +2,7 @@ package com.proyecto.hojadevida.controller;
 
 import com.proyecto.hojadevida.service.HojaDeVidaService;
 import com.proyecto.hojadevida.dto.HojaDeVidaDTO;
-import com.proyecto.login.dto.ApiResponse;
+import com.proyecto.hojadevida.dto.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
