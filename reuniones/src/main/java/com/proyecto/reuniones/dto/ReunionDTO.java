@@ -21,6 +21,6 @@ public class ReunionDTO {
     @NotBlank(message = "El curso no puede estar vacío")
     private String curso;
 
-    @NotBlank(message = "El nombre del encargado no puede estar vacío")
+    @NotBlank(message = "El nombre del docente encargado no puede estar estar en blanco")
     private String nombreEncargado;
 }

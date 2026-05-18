@@ -1,36 +1,60 @@
 package com.proyecto.reuniones.controller;
 
-import com.proyecto.reuniones.model.Reunion;
 import com.proyecto.reuniones.service.ReunionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.proyecto.reuniones.dto.ReunionDTO;
+import com.proyecto.reuniones.dto.ApiResponse;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/reuniones")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/reuniones")
 public class ReunionController {
 
-    @Autowired
-    private ReunionService reunionService;
+    private final ReunionService reunionService;
 
-    @GetMapping
-    public List<Reunion> getAll() {
-        return reunionService.getAll();
+    @GetMapping("/list")
+    public ResponseEntity<ApiResponse<List<ReunionDTO>>> getAllReuniones() {
+        List<ReunionDTO> reuniones = reunionService.getAllReunionesDTO();
+        ApiResponse<List<ReunionDTO>> response =
+                new ApiResponse<>(200, "Listado de reuniones", reuniones);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public Reunion getById(@PathVariable Long id) {
-        return reunionService.getById(id);
+    public ResponseEntity<ApiResponse<ReunionDTO>> getReunionById(@PathVariable Long id) {
+        ReunionDTO reunion = reunionService.getReunionById(id);
+        ApiResponse<ReunionDTO> response =
+                new ApiResponse<>(200, "Reunión encontrada", reunion);
+        return ResponseEntity.ok(response);
     }
 
-    @PostMapping
-    public Reunion crear(@RequestBody Reunion reunion) {
-        return reunionService.crear(reunion);
+    @PostMapping("/create")
+    public ResponseEntity<ApiResponse<ReunionDTO>> createReunion(
+            @Valid @RequestBody ReunionDTO dto) {
+        ReunionDTO created = reunionService.createReunion(dto);
+        ApiResponse<ReunionDTO> response =
+                new ApiResponse<>(201, "Reunión creada", created);
+        return ResponseEntity.status(201).body(response);
+    }
+@PutMapping("/update/{id}")
+    public ResponseEntity<ApiResponse<ReunionDTO>> updateReunion(
+            @PathVariable Long id,
+            @Valid @RequestBody ReunionDTO dto) {
+        ReunionDTO updated = reunionService.updateReunion(id, dto);
+        ApiResponse<ReunionDTO> response =
+                new ApiResponse<>(200, "Reunión actualizada", updated);
+        return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Long id) {
-        reunionService.eliminar(id);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteReunion(@PathVariable Long id) {
+        reunionService.deleteReunion(id);
+        ApiResponse<Void> response =
+                new ApiResponse<>(200, "Reunión eliminada", null);
+        return ResponseEntity.ok(response);
     }
 }

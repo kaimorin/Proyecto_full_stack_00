@@ -1,31 +1,60 @@
 package com.proyecto.reuniones.service;
 
+import org.springframework.stereotype.Service;
+import com.proyecto.reuniones.dto.ReunionDTO;
 import com.proyecto.reuniones.model.Reunion;
 import com.proyecto.reuniones.repository.ReunionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ReunionService {
 
-    @Autowired
-    private ReunionRepository reunionRepository;
+    private final ReunionRepository reunionRepository;
 
-    public List<Reunion> getAll() {
-        return reunionRepository.findAll();
+    public List<ReunionDTO> getAllReunionesDTO() {
+        return reunionRepository.findAll()
+                .stream()
+                .map(r -> new ReunionDTO(
+                        r.getFecha(),
+                        r.getHora(),
+                        r.getMotivo(),
+                        r.getCurso(),
+                        r.getNombreEncargado()
+                ))
+                .toList();
     }
 
-    public Reunion getById(Long id) {
-        return reunionRepository.findById(id).orElse(null);
+    public ReunionDTO getReunionById(Long id) {
+        Reunion r = reunionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reunión no encontrada con id: " + id));
+        return new ReunionDTO(r.getFecha(), r.getHora(), r.getMotivo(), r.getCurso(), r.getNombreEncargado());
     }
 
-    public Reunion crear(Reunion reunion) {
-        return reunionRepository.save(reunion);
+    public ReunionDTO createReunion(ReunionDTO dto) {
+        Reunion r = new Reunion(null, dto.getFecha(), dto.getHora(), dto.getMotivo(),
+                dto.getCurso(), dto.getNombreEncargado());
+        Reunion saved = reunionRepository.save(r);
+        return new ReunionDTO(saved.getFecha(), saved.getHora(), saved.getMotivo(),
+                saved.getCurso(), saved.getNombreEncargado());
+    }
+public ReunionDTO updateReunion(Long id, ReunionDTO dto) {
+        Reunion r = reunionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reunión no encontrada con id: " + id));
+        r.setFecha(dto.getFecha());
+        r.setHora(dto.getHora());
+        r.setMotivo(dto.getMotivo());
+        r.setCurso(dto.getCurso());
+        r.setNombreEncargado(dto.getNombreEncargado());
+        Reunion updated = reunionRepository.save(r);
+        return new ReunionDTO(updated.getFecha(), updated.getHora(), updated.getMotivo(),
+                updated.getCurso(), updated.getNombreEncargado());
     }
 
-    public void eliminar(Long id) {
+    public void deleteReunion(Long id) {
+        reunionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reunión no encontrada con id: " + id));
         reunionRepository.deleteById(id);
     }
 }
