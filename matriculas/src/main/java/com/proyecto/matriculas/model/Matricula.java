@@ -1,33 +1,29 @@
 package com.proyecto.matriculas.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "matriculas")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Matricula {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String runEstudiante;
+
+    @Column(nullable = false)
     private String nombreEstudiante;
+
+    @Column(nullable = false)
     private String curso;
+
+    @Column(nullable = false)
     private String estado;
-
-    // Getters y Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getRunEstudiante() { return runEstudiante; }
-    public void setRunEstudiante(String runEstudiante) { this.runEstudiante = runEstudiante; }
-
-    public String getNombreEstudiante() { return nombreEstudiante; }
-    public void setNombreEstudiante(String nombreEstudiante) { this.nombreEstudiante = nombreEstudiante; }
-
-    public String getCurso() { return curso; }
-    public void setCurso(String curso) { this.curso = curso; }
-
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
 }
