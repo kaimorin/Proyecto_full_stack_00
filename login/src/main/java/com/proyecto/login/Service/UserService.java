@@ -45,7 +45,7 @@ public class UserService {
                 .map(user -> new UserDTO(
                         user.getId(),
                         user.getUsername(),
-                        new RoleDTO(user.getRol().getIdrol(), user.getRol().getNombreRol())
+                        new RoleDTO(user.getRol().getIdrol(), user.getRol().getNombre())
                 ))
                 .toList();
     }

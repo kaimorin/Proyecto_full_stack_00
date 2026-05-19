@@ -29,7 +29,7 @@ public class UserController {
         UserDTO userDTO = new UserDTO(
                 newUser.getId(),
                 newUser.getUsername(),
-                new RoleDTO(newUser.getRol().getIdrol(), newUser.getRol().getNombreRol())
+                new RoleDTO(newUser.getRol().getIdrol(), newUser.getRol().getNombre())
         );
 
         ApiResponse<UserDTO> response = new ApiResponse<>(200, "Usuario registrado correctamente", userDTO);
