@@ -1,4 +1,4 @@
-package com.proyecto.asistencia.config;
+package com.proyecto.hojadevida.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

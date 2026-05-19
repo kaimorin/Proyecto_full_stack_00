@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AsistenciaDTO {
 
-    @NotBlank(message = "La fecha no puede estar vacía")
+    @NotNull(message = "La fecha no puede estar vacía")
     Date fecha;
 
     @NotBlank (message = "El estado debe ser presente, ausente o atrasado. No puede estar vacio")
@@ -24,8 +24,8 @@ public class AsistenciaDTO {
     String estadoAsistencia;
 
     @NotNull (message = "El rut no puede estar vacio")
-    @Min (value = 8, message = "El rut debe tener desde 8 caracteres")
-    @Max (value = 9, message = "El rut debe tener máximo 9 caracteres")
+    @Min(value = 10000000, message = "El rut debe tener mínimo 8 dígitos")
+    @Max(value = 999999999, message = "El rut debe tener máximo 89 dígitos")
     int rutAlumno;
 
 }
