@@ -1,4 +1,4 @@
-CREATE TABLE notificaciones (
+CREATE TABLE notificacion (
     id BIGINT NOT NULL AUTO_INCREMENT,
     mensaje VARCHAR(500) NOT NULL,
     origen VARCHAR(100) NOT NULL,

@@ -1,8 +1,18 @@
 package com.proyecto.notificaciones.model;
 
-import jakarta.persistence.*;
-import lombok.*;
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "notificaciones")
@@ -19,7 +29,7 @@ public class Notificacion {
     private String mensaje;
 
     @Column(nullable = false)
-    private String origen; // Ej: "SERVICIO-NOTAS", "SISTEMA-USUARIOS"
+    private String origen; 
 
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
