@@ -2,13 +2,18 @@ package com.proyecto.leccionario.controller;
 
 import com.proyecto.leccionario.model.Leccionario;
 import com.proyecto.leccionario.service.LeccionarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/leccionario")
+@RequestMapping("/v1/api/leccionario")
 @RequiredArgsConstructor
 public class LeccionarioController {
 
@@ -34,12 +39,13 @@ public class LeccionarioController {
     }
 
     @PostMapping
-    public Leccionario crear(@RequestBody Leccionario leccionario) {
-        return service.crear(leccionario);
+    public ResponseEntity<Leccionario> crear(@Valid @RequestBody Leccionario leccionario) {
+        Leccionario creado = service.crear(leccionario);
+        return ResponseEntity.ok(creado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Leccionario> actualizar(@PathVariable Long id, @RequestBody Leccionario lec) {
+    public ResponseEntity<Leccionario> actualizar(@PathVariable Long id, @Valid @RequestBody Leccionario lec) {
         try {
             return ResponseEntity.ok(service.actualizar(id, lec));
         } catch (Exception e) {
@@ -51,5 +57,13 @@ public class LeccionarioController {
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         service.eliminar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+                errors.put(error.getField(), error.getDefaultMessage()));
+        return ResponseEntity.badRequest().body(errors);
     }
 }

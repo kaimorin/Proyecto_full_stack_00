@@ -1,6 +1,7 @@
 package com.proyecto.login.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -14,4 +15,7 @@ public class UserCreateDTO {
     @NotBlank(message = "La contraseña no puede estar vacía")
     @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
     private String password;
+
+    @NotNull(message = "El id del rol es obligatorio")
+    private Long roleId;
 }

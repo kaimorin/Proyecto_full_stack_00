@@ -1,7 +1,9 @@
 
 INSERT INTO roles (nombreRol) VALUES
 ('ADMIN'),
-('USER');
+('Inspector'),
+('Alumno'),
+('Profesor');
 
 INSERT INTO users (username, password, idrol_user) VALUES
 ('Lider', '$2a$10$7Q0lYwYwFvZkYwYwYwYwY.7Q0lYwYwFvZkYwYwYwYwYwYwYwYwYwYwYw', 1),

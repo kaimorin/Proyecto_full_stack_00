@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+
 
 import lombok.*;
 
@@ -20,7 +20,7 @@ public class Rol {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY )
     private Long idrol;
-    @NotBlank
+    @Column(name="nombreRol")
     private String nombreRol;
 
  

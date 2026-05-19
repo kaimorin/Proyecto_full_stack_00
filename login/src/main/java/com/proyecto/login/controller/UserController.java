@@ -1,6 +1,8 @@
 package com.proyecto.login.controller;
 import com.proyecto.login.Service.UserService;
 import com.proyecto.login.dto.ApiResponse;
+import com.proyecto.login.dto.RoleDTO;
+import com.proyecto.login.dto.UserCreateDTO;
 import com.proyecto.login.dto.UserCredentialsDTO;
 import com.proyecto.login.dto.UserDTO;
 import com.proyecto.login.model.User;
@@ -22,12 +24,15 @@ public class UserController {
 
     
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<UserDTO>> register(@Valid @RequestBody UserCredentialsDTO dto) {
-        User newUser = userService.registerUser(dto.getUsername(), dto.getPassword());
-        UserDTO userDTO = new UserDTO(newUser.getId(), newUser.getUsername());
+    public ResponseEntity<ApiResponse<UserDTO>> register(@Valid @RequestBody UserCreateDTO dto) {
+        User newUser = userService.registerUser(dto.getUsername(), dto.getPassword(), dto.getRoleId());
+        UserDTO userDTO = new UserDTO(
+                newUser.getId(),
+                newUser.getUsername(),
+                new RoleDTO(newUser.getRol().getIdrol(), newUser.getRol().getNombreRol())
+        );
 
-        ApiResponse<UserDTO> response =
-                new ApiResponse<>(200, "Usuario registrado correctamente", userDTO);
+        ApiResponse<UserDTO> response = new ApiResponse<>(200, "Usuario registrado correctamente", userDTO);
 
         return ResponseEntity.ok(response);
     }
