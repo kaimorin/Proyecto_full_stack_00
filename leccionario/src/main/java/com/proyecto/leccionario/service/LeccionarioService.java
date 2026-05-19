@@ -1,5 +1,6 @@
 package com.proyecto.leccionario.service;
 
+import com.proyecto.leccionario.dto.LeccionarioDto;
 import com.proyecto.leccionario.model.Curso;
 import com.proyecto.leccionario.model.Leccionario;
 import com.proyecto.leccionario.repository.CursoRepository;
@@ -17,43 +18,74 @@ public class LeccionarioService {
     private final RepositoryLeccionario repository;
     private final CursoRepository cursoRepository;
 
-    public List<Leccionario> listarTodos() {
-        return repository.findAll();
+    public List<LeccionarioDto> listarTodos() {
+        return repository.findAll().stream()
+                .map(this::entityToDto)
+                .toList();
     }
 
-    public Optional<Leccionario> obtenerPorId(Long id) {
-        return repository.findById(id);
+    public Optional<LeccionarioDto> obtenerPorId(Long id) {
+        return repository.findById(id).map(this::entityToDto);
     }
 
-    public Optional<Leccionario> obtenerPorAsignatura(String asignatura) {
-        return repository.findByAsignatura(asignatura);
+    public Optional<LeccionarioDto> obtenerPorAsignatura(String asignatura) {
+        return repository.findByAsignatura(asignatura).map(this::entityToDto);
     }
 
-    public Leccionario crear(Leccionario leccionario) {
-        // Resolver curso si se proporciona solo el id en la petición
-        Curso c = null;
+    public LeccionarioDto crear(LeccionarioDto leccionarioDto) {
+        Leccionario leccionario = dtoToEntity(leccionarioDto);
         if (leccionario.getCurso() != null && leccionario.getCurso().getId() != null) {
-            c = cursoRepository.findById(leccionario.getCurso().getId()).orElse(null);
+            Curso c = cursoRepository.findById(leccionario.getCurso().getId()).orElse(null);
             leccionario.setCurso(c);
         }
-        return repository.save(leccionario);
+        return entityToDto(repository.save(leccionario));
     }
 
-    public Leccionario actualizar(Long id, Leccionario data) {
+    public LeccionarioDto actualizar(Long id, LeccionarioDto data) {
         return repository.findById(id).map(l -> {
             l.setAsignatura(data.getAsignatura());
             l.setFecha(data.getFecha());
             l.setContenido(data.getContenido());
             l.setIdProfesor(data.getIdProfesor());
-            if (data.getCurso() != null && data.getCurso().getId() != null) {
-                Curso c = cursoRepository.findById(data.getCurso().getId()).orElse(null);
+            if (data.getCursoId() != null) {
+                Curso c = cursoRepository.findById(data.getCursoId()).orElse(null);
                 l.setCurso(c);
             }
-            return repository.save(l);
+            return entityToDto(repository.save(l));
         }).orElseThrow(() -> new RuntimeException("No se encontró el leccionario"));
     }
 
     public void eliminar(Long id) {
         repository.deleteById(id);
+    }
+
+    private Leccionario dtoToEntity(LeccionarioDto dto) {
+        Curso curso = null;
+        if (dto.getCursoId() != null) {
+            curso = Curso.builder().id(dto.getCursoId()).build();
+        }
+        return Leccionario.builder()
+                .id(dto.getId())
+                .asignatura(dto.getAsignatura())
+                .fecha(dto.getFecha())
+                .contenido(dto.getContenido())
+                .idProfesor(dto.getIdProfesor())
+                .curso(curso)
+                .build();
+    }
+
+    private LeccionarioDto entityToDto(Leccionario entity) {
+        Long cursoId = null;
+        if (entity.getCurso() != null) {
+            cursoId = entity.getCurso().getId();
+        }
+        return LeccionarioDto.builder()
+                .id(entity.getId())
+                .asignatura(entity.getAsignatura())
+                .fecha(entity.getFecha())
+                .contenido(entity.getContenido())
+                .idProfesor(entity.getIdProfesor())
+                .cursoId(cursoId)
+                .build();
     }
 }

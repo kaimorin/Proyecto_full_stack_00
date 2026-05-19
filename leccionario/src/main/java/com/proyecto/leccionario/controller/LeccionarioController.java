@@ -1,6 +1,6 @@
 package com.proyecto.leccionario.controller;
 
-import com.proyecto.leccionario.model.Leccionario;
+import com.proyecto.leccionario.dto.LeccionarioDto;
 import com.proyecto.leccionario.service.LeccionarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,32 +20,32 @@ public class LeccionarioController {
     private final LeccionarioService service;
 
     @GetMapping
-    public List<Leccionario> listar() {
+    public List<LeccionarioDto> listar() {
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Leccionario> obtener(@PathVariable Long id) {
+    public ResponseEntity<LeccionarioDto> obtener(@PathVariable Long id) {
         return service.obtenerPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/buscar")
-    public ResponseEntity<Leccionario> buscar(@RequestParam String asignatura) {
+    public ResponseEntity<LeccionarioDto> buscar(@RequestParam String asignatura) {
         return service.obtenerPorAsignatura(asignatura)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Leccionario> crear(@Valid @RequestBody Leccionario leccionario) {
-        Leccionario creado = service.crear(leccionario);
+    public ResponseEntity<LeccionarioDto> crear(@Valid @RequestBody LeccionarioDto leccionario) {
+        LeccionarioDto creado = service.crear(leccionario);
         return ResponseEntity.ok(creado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Leccionario> actualizar(@PathVariable Long id, @Valid @RequestBody Leccionario lec) {
+    public ResponseEntity<LeccionarioDto> actualizar(@PathVariable Long id, @Valid @RequestBody LeccionarioDto lec) {
         try {
             return ResponseEntity.ok(service.actualizar(id, lec));
         } catch (Exception e) {
