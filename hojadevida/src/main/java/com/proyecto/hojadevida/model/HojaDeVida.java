@@ -24,7 +24,7 @@ public class HojaDeVida {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nombreCompleto;
 
     @Column(nullable = false)
@@ -37,7 +37,7 @@ public class HojaDeVida {
     private String direccion;
 
     @Column(nullable = false)
-    private String telefonoApoderado;
+    private int telefonoApoderado;
 
     @Column(nullable = false)
     private String nombreApoderado;
