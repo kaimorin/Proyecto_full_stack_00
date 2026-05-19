@@ -15,15 +15,16 @@ public class HojaDeVidaDTO {
     @NotNull(message = "La fecha de nacimiento no puede ser nula")
     private Date fechaNacimiento;
 
-    @Min(value = 8, message = "El RUT debe tener mínimo 8 dígitos y no debe tener guión")
-    @Max(value = 9, message = "El RUT debe tener máximo 9 dígitos y no debe tener guión")
+    @NotNull (message = "El rut no puede estar vacio")
+    @Min(value = 10000000, message = "El rut debe tener mínimo 8 dígitos")
+    @Max(value = 999999999, message = "El rut debe tener máximo 89 dígitos")
     private int rutAlumno;
 
     @NotBlank(message = "La dirección no puede estar vacía")
     private String direccion;
 
-    @Min(value = 9, message = "El número de teléfono debe tener mínimo 9 dígitos")
-    @Max(value = 9, message = "El número de teléfono debe tener máximo 9 dígitos")
+    @Min(value = 100000000, message = "El teléfono debe tener 9 dígitos")
+    @Max(value = 999999999, message = "El teléfono debe tener 9 dígitos")
     private int telefonoApoderado;
 
     @NotBlank(message = "El nombre del apoderado no puede estar vacío")
