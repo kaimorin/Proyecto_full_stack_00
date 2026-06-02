@@ -1,0 +1,9 @@
+logging:   
+    level:
+        root: INFO
+        com.proyecto.login: DEBUG
+    file:
+        name: logs/login-service.log
+    pattern:
+        console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+        file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
