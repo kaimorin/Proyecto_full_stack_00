@@ -24,6 +24,7 @@ public class UserController {
 
     
     @PostMapping("/register")
+    @io.swagger.v3.oas.annotations.Operation(summary = "Registrar un nuevo usuario", description = "Crea un nuevo usuario con un rol específico")
     public ResponseEntity<ApiResponse<UserDTO>> register(@Valid @RequestBody UserCreateDTO dto) {
         User newUser = userService.registerUser(dto.getUsername(), dto.getPassword(), dto.getRoleId());
         UserDTO userDTO = new UserDTO(
@@ -39,6 +40,7 @@ public class UserController {
 
    
     @PostMapping("/login")
+    @io.swagger.v3.oas.annotations.Operation(summary = "Iniciar sesión", description = "Valida las credenciales del usuario y permite el acceso")
     public ResponseEntity<ApiResponse<String>> login(@Valid @RequestBody UserCredentialsDTO dto) {
         boolean success = userService.login(dto.getUsername(), dto.getPassword());
 
@@ -54,6 +56,7 @@ public class UserController {
     }
 
     @GetMapping("/list")
+    @io.swagger.v3.oas.annotations.Operation(summary = "Listar usuarios", description = "Obtiene una lista de todos los usuarios registrados")
     public ResponseEntity<ApiResponse<List<UserDTO>>> getAllUsers() {
         List<UserDTO> users = userService.getAllUsersDTO();
         ApiResponse<List<UserDTO>> response =
