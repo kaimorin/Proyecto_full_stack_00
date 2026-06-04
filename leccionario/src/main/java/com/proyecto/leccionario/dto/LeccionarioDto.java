@@ -27,6 +27,4 @@ public class LeccionarioDto {
     private String contenido;
 
     private Long idProfesor;
-
-    private Long cursoId;
 }

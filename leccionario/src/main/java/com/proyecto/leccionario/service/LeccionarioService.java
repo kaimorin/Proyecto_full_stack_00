@@ -1,9 +1,7 @@
 package com.proyecto.leccionario.service;
 
 import com.proyecto.leccionario.dto.LeccionarioDto;
-import com.proyecto.leccionario.model.Curso;
 import com.proyecto.leccionario.model.Leccionario;
-import com.proyecto.leccionario.repository.CursoRepository;
 import com.proyecto.leccionario.repository.RepositoryLeccionario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +14,6 @@ import java.util.Optional;
 public class LeccionarioService {
 
     private final RepositoryLeccionario repository;
-    private final CursoRepository cursoRepository;
 
     public List<LeccionarioDto> listarTodos() {
         return repository.findAll().stream()
@@ -34,10 +31,6 @@ public class LeccionarioService {
 
     public LeccionarioDto crear(LeccionarioDto leccionarioDto) {
         Leccionario leccionario = dtoToEntity(leccionarioDto);
-        if (leccionario.getCurso() != null && leccionario.getCurso().getId() != null) {
-            Curso c = cursoRepository.findById(leccionario.getCurso().getId()).orElse(null);
-            leccionario.setCurso(c);
-        }
         return entityToDto(repository.save(leccionario));
     }
 
@@ -47,10 +40,6 @@ public class LeccionarioService {
             l.setFecha(data.getFecha());
             l.setContenido(data.getContenido());
             l.setIdProfesor(data.getIdProfesor());
-            if (data.getCursoId() != null) {
-                Curso c = cursoRepository.findById(data.getCursoId()).orElse(null);
-                l.setCurso(c);
-            }
             return entityToDto(repository.save(l));
         }).orElseThrow(() -> new RuntimeException("No se encontró el leccionario"));
     }
@@ -60,32 +49,22 @@ public class LeccionarioService {
     }
 
     private Leccionario dtoToEntity(LeccionarioDto dto) {
-        Curso curso = null;
-        if (dto.getCursoId() != null) {
-            curso = Curso.builder().id(dto.getCursoId()).build();
-        }
         return Leccionario.builder()
                 .id(dto.getId())
                 .asignatura(dto.getAsignatura())
                 .fecha(dto.getFecha())
                 .contenido(dto.getContenido())
                 .idProfesor(dto.getIdProfesor())
-                .curso(curso)
                 .build();
     }
 
     private LeccionarioDto entityToDto(Leccionario entity) {
-        Long cursoId = null;
-        if (entity.getCurso() != null) {
-            cursoId = entity.getCurso().getId();
-        }
         return LeccionarioDto.builder()
                 .id(entity.getId())
                 .asignatura(entity.getAsignatura())
                 .fecha(entity.getFecha())
                 .contenido(entity.getContenido())
                 .idProfesor(entity.getIdProfesor())
-                .cursoId(cursoId)
                 .build();
     }
 }

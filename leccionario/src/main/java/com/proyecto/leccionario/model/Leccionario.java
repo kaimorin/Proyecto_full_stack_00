@@ -30,8 +30,4 @@ public class Leccionario {
 
     @Column(name = "id_profesor")
     private Long idProfesor;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_curso")
-    private Curso curso;
 }

@@ -1,5 +1,6 @@
 package com.proyecto.leccionario.controller;
 
+import com.proyecto.leccionario.dto.ApiResponse;
 import com.proyecto.leccionario.dto.LeccionarioDto;
 import com.proyecto.leccionario.service.LeccionarioService;
 import jakarta.validation.Valid;
@@ -20,50 +21,89 @@ public class LeccionarioController {
     private final LeccionarioService service;
 
     @GetMapping
-    public List<LeccionarioDto> listar() {
-        return service.listarTodos();
+    public ResponseEntity<ApiResponse<List<LeccionarioDto>>> listar() {
+        try {
+            List<LeccionarioDto> lista = service.listarTodos();
+            ApiResponse<List<LeccionarioDto>> response = new ApiResponse<>(200, "Listado de leccionarios", lista);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ApiResponse<List<LeccionarioDto>> response = new ApiResponse<>(500, "Error al listar leccionarios: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LeccionarioDto> obtener(@PathVariable Long id) {
-        return service.obtenerPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ApiResponse<LeccionarioDto>> obtener(@PathVariable Long id) {
+        try {
+            return service.obtenerPorId(id)
+                    .map(leccionario -> ResponseEntity.ok(new ApiResponse<>(200, "Leccionario encontrado", leccionario)))
+                    .orElse(ResponseEntity.status(404).body(new ApiResponse<>(404, "Leccionario no encontrado", null)));
+        } catch (Exception e) {
+            ApiResponse<LeccionarioDto> response = new ApiResponse<>(500, "Error al obtener leccionario: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
+        }
     }
 
     @GetMapping("/buscar")
-    public ResponseEntity<LeccionarioDto> buscar(@RequestParam String asignatura) {
-        return service.obtenerPorAsignatura(asignatura)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ApiResponse<LeccionarioDto>> buscar(@RequestParam String asignatura) {
+        try {
+            return service.obtenerPorAsignatura(asignatura)
+                    .map(leccionario -> ResponseEntity.ok(new ApiResponse<>(200, "Leccionario encontrado", leccionario)))
+                    .orElse(ResponseEntity.status(404).body(new ApiResponse<>(404, "Leccionario no encontrado", null)));
+        } catch (Exception e) {
+            ApiResponse<LeccionarioDto> response = new ApiResponse<>(500, "Error al buscar leccionario: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
+        }
     }
 
     @PostMapping
-    public ResponseEntity<LeccionarioDto> crear(@Valid @RequestBody LeccionarioDto leccionario) {
-        LeccionarioDto creado = service.crear(leccionario);
-        return ResponseEntity.ok(creado);
+    public ResponseEntity<ApiResponse<LeccionarioDto>> crear(@Valid @RequestBody LeccionarioDto leccionario) {
+        try {
+            LeccionarioDto creado = service.crear(leccionario);
+            ApiResponse<LeccionarioDto> response = new ApiResponse<>(201, "Leccionario creado", creado);
+            return ResponseEntity.status(201).body(response);
+        } catch (Exception e) {
+            ApiResponse<LeccionarioDto> response = new ApiResponse<>(400, "Error al crear leccionario: " + e.getMessage(), null);
+            return ResponseEntity.badRequest().body(response);
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<LeccionarioDto> actualizar(@PathVariable Long id, @Valid @RequestBody LeccionarioDto lec) {
+    public ResponseEntity<ApiResponse<LeccionarioDto>> actualizar(@PathVariable Long id, @Valid @RequestBody LeccionarioDto lec) {
         try {
-            return ResponseEntity.ok(service.actualizar(id, lec));
+            LeccionarioDto actualizado = service.actualizar(id, lec);
+            ApiResponse<LeccionarioDto> response = new ApiResponse<>(200, "Leccionario actualizado", actualizado);
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            ApiResponse<LeccionarioDto> response = new ApiResponse<>(404, e.getMessage(), null);
+            return ResponseEntity.status(404).body(response);
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            ApiResponse<LeccionarioDto> response = new ApiResponse<>(500, "Error al actualizar leccionario: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        service.eliminar(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<ApiResponse<Void>> eliminar(@PathVariable Long id) {
+        try {
+            service.eliminar(id);
+            ApiResponse<Void> response = new ApiResponse<>(200, "Leccionario eliminado", null);
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            ApiResponse<Void> response = new ApiResponse<>(404, e.getMessage(), null);
+            return ResponseEntity.status(404).body(response);
+        } catch (Exception e) {
+            ApiResponse<Void> response = new ApiResponse<>(500, "Error al eliminar leccionario: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
+        }
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ApiResponse<Map<String, String>>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 errors.put(error.getField(), error.getDefaultMessage()));
-        return ResponseEntity.badRequest().body(errors);
+        ApiResponse<Map<String, String>> response = new ApiResponse<>(400, "Error de validación", errors);
+        return ResponseEntity.badRequest().body(response);
     }
 }
