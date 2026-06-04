@@ -1,5 +1,5 @@
 package com.proyecto.login.controller;
-import com.proyecto.login.Service.UserService;
+import com.proyecto.login.service.UserService;
 import com.proyecto.login.dto.ApiResponse;
 import com.proyecto.login.dto.RoleDTO;
 import com.proyecto.login.dto.UserCreateDTO;

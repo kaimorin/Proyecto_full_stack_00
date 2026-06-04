@@ -1,6 +1,9 @@
 package com.proyecto.matriculas.controller;
 
 import com.proyecto.matriculas.service.MatriculaService;
+
+import io.swagger.v3.oas.annotations.Operation;
+
 import com.proyecto.matriculas.dto.MatriculaDTO;
 import com.proyecto.matriculas.dto.ApiResponse;
 import jakarta.validation.Valid;
@@ -17,6 +20,7 @@ public class MatriculaController {
     private final MatriculaService matriculaService;
 
     @GetMapping("/list")
+    @Operation(summary = "Obtener todas las matrículas")
     public ResponseEntity<ApiResponse<List<MatriculaDTO>>> getAllMatriculas() {
         List<MatriculaDTO> matriculas = matriculaService.getAllMatriculasDTO();
         ApiResponse<List<MatriculaDTO>> response =
@@ -25,6 +29,7 @@ public class MatriculaController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtener matrícula por ID")
     public ResponseEntity<ApiResponse<MatriculaDTO>> getMatriculaById(@PathVariable Long id) {
         MatriculaDTO matricula = matriculaService.getMatriculaById(id);
         ApiResponse<MatriculaDTO> response =
@@ -33,6 +38,7 @@ public class MatriculaController {
     }
 
     @PostMapping("/create")
+    @Operation(summary = "Crear una nueva matrícula")
     public ResponseEntity<ApiResponse<MatriculaDTO>> createMatricula(
             @Valid @RequestBody MatriculaDTO dto) {
         MatriculaDTO created = matriculaService.createMatricula(dto);
@@ -41,6 +47,7 @@ public class MatriculaController {
         return ResponseEntity.status(201).body(response);
     }
 @PutMapping("/update/{id}")
+    @Operation(summary = "Actualizar una matrícula existente")
     public ResponseEntity<ApiResponse<MatriculaDTO>> updateMatricula(
             @PathVariable Long id,
             @Valid @RequestBody MatriculaDTO dto) {
@@ -51,6 +58,7 @@ public class MatriculaController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Eliminar una matrícula")
     public ResponseEntity<ApiResponse<Void>> deleteMatricula(@PathVariable Long id) {
         matriculaService.deleteMatricula(id);
         ApiResponse<Void> response =

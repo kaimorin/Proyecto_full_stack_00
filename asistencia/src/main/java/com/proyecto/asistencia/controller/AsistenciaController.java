@@ -1,6 +1,9 @@
 package com.proyecto.asistencia.controller;
 
 import com.proyecto.asistencia.service.AsistenciaService;
+
+import io.swagger.v3.oas.annotations.Operation;
+
 import com.proyecto.asistencia.dto.ApiResponse;
 import com.proyecto.asistencia.dto.AsistenciaDTO;
 import jakarta.validation.Valid;
@@ -16,6 +19,7 @@ public class AsistenciaController {
 
     private final AsistenciaService asistenciaService;
 
+    @Operation(summary = "Obtener todas las asistencias")
     @GetMapping("/list")
     public ResponseEntity<ApiResponse<List<AsistenciaDTO>>> getAllAsistencias() {
         List<AsistenciaDTO> asistencias = asistenciaService.getAllAsistenciasDTO();
@@ -24,6 +28,7 @@ public class AsistenciaController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Obtener asistencia por ID")
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<AsistenciaDTO>> getAsistenciaById(@PathVariable Long id) {
         AsistenciaDTO asistencia = asistenciaService.getAsistenciaById(id);
@@ -32,6 +37,7 @@ public class AsistenciaController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Crear nueva asistencia")
     @PostMapping("/create")
     public ResponseEntity<ApiResponse<AsistenciaDTO>> createAsistencia(
             @Valid @RequestBody AsistenciaDTO dto) {
@@ -41,6 +47,7 @@ public class AsistenciaController {
         return ResponseEntity.status(201).body(response);
     }
 
+    @Operation(summary = "Actualizar asistencia")
     @PutMapping("/update/{id}")
     public ResponseEntity<ApiResponse<AsistenciaDTO>> updateAsistencia(
             @PathVariable Long id,
