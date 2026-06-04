@@ -1,0 +1,41 @@
+server:
+  port: 9999
+spring:
+    application:
+        name: gateway
+    cloud:
+        gateway:
+            discovery:
+                locator:
+                    enabled: true
+                    lower-case-service-id: true
+            routes:
+                - id: user-service
+                  url: lb://user-service
+                  predicates:
+                    - Path=/api/v1/user/
+
+#Para los demas hace lo mismo solo cambia a ruta y el id del servicio
+
+
+
+
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka/
+        register-with-eureka: true
+        fetch-registry: true
+    instance:
+        lease-renewal-interval-in-seconds: 30
+        lease-expiration-duration-in-seconds: 90
+    
+logging:   
+    level:
+        root: INFO
+    file:
+        name: logs/login-service.log
+    pattern:
+        console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+        file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
