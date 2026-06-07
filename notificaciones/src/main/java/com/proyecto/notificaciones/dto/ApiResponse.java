@@ -1,4 +1,4 @@
-package com.proyecto.notas.dto;
+package com.proyecto.notificaciones.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

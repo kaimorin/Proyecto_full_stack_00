@@ -1,6 +1,6 @@
 CREATE TABLE notas (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    alumno VARCHAR(255) NOT NULL,
+    estudiante VARCHAR(255) NOT NULL,
     asignatura VARCHAR(255) NOT NULL,
     valor DOUBLE NOT NULL,
     PRIMARY KEY (id)

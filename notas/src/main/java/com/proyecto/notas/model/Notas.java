@@ -27,16 +27,6 @@ public class Notas {
     @DecimalMax(value = "7.0", message = "La nota máxima es 7.0")
     @Column(nullable = false)
     private Double valor;
-
-    public Object getAlumno() {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'getAlumno'");
-    }
-
-    public void setAlumno(Object alumno) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'setAlumno'");
-    }
 }
 
 
