@@ -3,6 +3,8 @@ package com.proyecto.leccionario.controller;
 import com.proyecto.leccionario.dto.ApiResponse;
 import com.proyecto.leccionario.dto.LeccionarioDto;
 import com.proyecto.leccionario.service.LeccionarioService;
+
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ public class LeccionarioController {
     private final LeccionarioService service;
 
     @GetMapping
+    @Operation(summary = "Listado de leccionarios", description = "Permite listar los leccionarios existentes")
     public ResponseEntity<ApiResponse<List<LeccionarioDto>>> listar() {
         try {
             List<LeccionarioDto> lista = service.listarTodos();
@@ -33,6 +36,7 @@ public class LeccionarioController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar leccionario por ID", description = "Permite buscar por ID un leccionario específico")
     public ResponseEntity<ApiResponse<LeccionarioDto>> obtener(@PathVariable Long id) {
         try {
             return service.obtenerPorId(id)
@@ -45,6 +49,7 @@ public class LeccionarioController {
     }
 
     @GetMapping("/buscar")
+    @Operation(summary = "Buscar leccionario por asignatura", description = "Permite buscar leccionario por asignatura")
     public ResponseEntity<ApiResponse<LeccionarioDto>> buscar(@RequestParam String asignatura) {
         try {
             return service.obtenerPorAsignatura(asignatura)
@@ -57,6 +62,7 @@ public class LeccionarioController {
     }
 
     @PostMapping
+    @Operation(summary = "Crear nuevo leccionario", description = "Permite crear un nuevo leccionario")
     public ResponseEntity<ApiResponse<LeccionarioDto>> crear(@Valid @RequestBody LeccionarioDto leccionario) {
         try {
             LeccionarioDto creado = service.crear(leccionario);
@@ -69,6 +75,7 @@ public class LeccionarioController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Actualizar leccionario", description = "Permite actualizar los datos del leccionario")
     public ResponseEntity<ApiResponse<LeccionarioDto>> actualizar(@PathVariable Long id, @Valid @RequestBody LeccionarioDto lec) {
         try {
             LeccionarioDto actualizado = service.actualizar(id, lec);
@@ -84,6 +91,7 @@ public class LeccionarioController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar leccionario por ID", description = "Permite eliminar por ID un leccionario específico")
     public ResponseEntity<ApiResponse<Void>> eliminar(@PathVariable Long id) {
         try {
             service.eliminar(id);
