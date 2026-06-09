@@ -1,6 +1,9 @@
 package com.proyecto.hojadevida.controller;
 
 import com.proyecto.hojadevida.service.HojaDeVidaService;
+
+import io.swagger.v3.oas.annotations.Operation;
+
 import com.proyecto.hojadevida.dto.HojaDeVidaDTO;
 import com.proyecto.hojadevida.dto.ApiResponse;
 import jakarta.validation.Valid;
@@ -17,6 +20,7 @@ public class HojaDeVidaController {
     private final HojaDeVidaService hojaDeVidaService;
 
     @GetMapping("/list")
+    @Operation(summary = "Listar todas las hojas de vida", description = "Permite listar las hojas de vida existentes")
     public ResponseEntity<ApiResponse<List<HojaDeVidaDTO>>> getAllHojaDeVidas() {
         List<HojaDeVidaDTO> hojas = hojaDeVidaService.getAllHojaDeVidasDTO();
         ApiResponse<List<HojaDeVidaDTO>> response =
@@ -25,6 +29,7 @@ public class HojaDeVidaController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar hoja de vida por ID", description = "Permite buscar una hoja de vida por ID o Rut")
     public ResponseEntity<ApiResponse<HojaDeVidaDTO>> getHojaDeVidaById(@PathVariable Long id) {
         HojaDeVidaDTO hoja = hojaDeVidaService.getHojaDeVidaById(id);
         ApiResponse<HojaDeVidaDTO> response =
@@ -33,6 +38,7 @@ public class HojaDeVidaController {
     }
 
     @PostMapping("/create")
+    @Operation(summary = "Crear una hoja de vida", description = "Permite crear una nueva hoja de vida")
     public ResponseEntity<ApiResponse<HojaDeVidaDTO>> createHojaDeVida(
             @Valid @RequestBody HojaDeVidaDTO dto) {
         HojaDeVidaDTO created = hojaDeVidaService.createHojaDeVida(dto);
@@ -42,6 +48,7 @@ public class HojaDeVidaController {
     }
 
     @PutMapping("/update/{id}")
+    @Operation(summary = "Actualizar hoja de vida", description = "Permite actualizar una hoja de vida existente")
     public ResponseEntity<ApiResponse<HojaDeVidaDTO>> updateHojaDeVida(
             @PathVariable Long id,
             @Valid @RequestBody HojaDeVidaDTO dto) {
@@ -52,6 +59,7 @@ public class HojaDeVidaController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Eliminar hoja de vida", description = "Permite eliminar una hoja de vida específica")
     public ResponseEntity<ApiResponse<Void>> deleteHojaDeVida(@PathVariable Long id) {
         hojaDeVidaService.deleteHojaDeVida(id);
         ApiResponse<Void> response =
