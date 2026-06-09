@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 import com.proyecto.notas.model.Notas;
 import com.proyecto.notas.dto.NotasDto;
-import com.proyecto.notas.dto.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import com.proyecto.notas.service.NotasService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
