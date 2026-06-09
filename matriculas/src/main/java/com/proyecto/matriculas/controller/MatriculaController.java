@@ -46,7 +46,7 @@ public class MatriculaController {
                 new ApiResponse<>(201, "Matrícula creada", created);
         return ResponseEntity.status(201).body(response);
     }
-@PutMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     @Operation(summary = "Actualizar una matrícula existente")
     public ResponseEntity<ApiResponse<MatriculaDTO>> updateMatricula(
             @PathVariable Long id,
