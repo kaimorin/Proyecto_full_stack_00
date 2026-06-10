@@ -11,7 +11,7 @@
 	<groupId>com.proyecto</groupId>
 	<artifactId>eureka</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
+	<name>eureka</name>
 	<description/>
 	<url/>
 	<licenses>
