@@ -18,7 +18,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idrol_user") 
     private Rol rol; 
 
@@ -39,36 +39,5 @@ public class User {
 
 
 
-    /* OTM
-    //@Builder.Default
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-        name = "users_roles", 
-        joinColumns = @JoinColumn(name = "user_id"), // Apunta al 'id' de esta clase
-        inverseJoinColumns = @JoinColumn(name = "rol_id") // Apunta al 'idrol' de Rol
-    )
-    private Set<Rol> roles = new HashSet<>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return id != null && id.equals(user.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
-    public void addRol(Rol rol) {
-        this.roles.add(rol);
-        rol.getUsers().add(this);
-    }
-
-    public void removeRol(Rol rol) {
-        this.roles.remove(rol);
-        rol.getUsers().remove(this);
-    }
-        */
 }
