@@ -14,10 +14,24 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>login</name>
 	<description>Sistema de Autenticación</description>
-	
-	<properties>
-		<java.version>21</java.version>
-	</properties>
+	  <properties>
+        <java.version>21</java.version>
+        <!-- 🔧 Cambio: definir versión de Spring Cloud -->
+        <spring-cloud.version>2025.1.1</spring-cloud.version>
+    </properties>
+
+    <!-- 🔧 Cambio: importar BOM de Spring Cloud -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 	
 	<dependencies>
 		<dependency>
@@ -73,6 +87,37 @@
 			<version>3.0.3</version>
 		</dependency>
 		
+		<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+		 <!-- Crypto (para BCryptPasswordEncoder, si lo usas) -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
+
+        <!-- JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
 		
 
 
