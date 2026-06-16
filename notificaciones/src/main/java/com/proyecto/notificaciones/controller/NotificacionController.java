@@ -19,6 +19,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Controlador REST para el microservicio de notificaciones.
+ *
+ * Expone endpoints que permiten listar, crear, obtener, marcar como leídas
+ * y eliminar notificaciones.
+ */
 @RestController
 @RequestMapping("/api/notificaciones")
 @Tag(name = "Notificaciones", description = "API para gestionar notificaciones")
@@ -27,6 +33,9 @@ public class NotificacionController {
     @Autowired
     private NotificacionService service;
 
+    /**
+     * Lista todas las notificaciones.
+     */
     @GetMapping
     @Operation(summary = "Listar todas las notificaciones", description = "Obtiene la lista completa de notificaciones")
     @ApiResponses({

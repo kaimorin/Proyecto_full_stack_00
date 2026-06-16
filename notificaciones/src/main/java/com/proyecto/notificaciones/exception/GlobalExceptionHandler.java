@@ -13,11 +13,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.proyecto.notificaciones.dto.ApiResponse;
 
-// Gestiona excepciones de toda la aplicación
+/**
+ * Manejador global de excepciones para el microservicio.
+ *
+ * Captura errores comunes de validación y HTTP y devuelve respuestas
+ * estructuradas con ApiResponse.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Errores de validación (@Valid)
+    /**
+     * Maneja los errores de validación de DTOs cuando @Valid falla.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Map<String, String>>> handleValidationErrors(
             MethodArgumentNotValidException ex) {
@@ -36,7 +43,9 @@ public class GlobalExceptionHandler {
                         errors));
     }
 
-    // JSON mal formulados
+    /**
+     * Maneja solicitudes JSON mal formadas o inválidas.
+     */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ApiResponse<Object>> handleInvalidJson(
             HttpMessageNotReadableException ex) {
@@ -48,7 +57,9 @@ public class GlobalExceptionHandler {
                         null));
     }
 
-    // Maneja métodos HTTP incorrectos
+    /**
+     * Maneja intentos de usar un método HTTP no permitido en el endpoint.
+     */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<ApiResponse<Object>> handleMethodNotAllowed(
             HttpRequestMethodNotSupportedException ex) {
@@ -60,7 +71,9 @@ public class GlobalExceptionHandler {
                         null));
     }
 
-    // Maneja errores generales de ejecución
+    /**
+     * Maneja excepciones de tiempo de ejecución y devuelve un error genérico.
+     */
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiResponse<Object>> handleRuntimeException(
             RuntimeException ex) {
@@ -72,7 +85,9 @@ public class GlobalExceptionHandler {
                         null));
     }
 
-    // Maneja cualquier error no controlado
+    /**
+     * Captura cualquier excepción no prevista y devuelve un error interno.
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Object>> handleGenericException(
             Exception ex) {
