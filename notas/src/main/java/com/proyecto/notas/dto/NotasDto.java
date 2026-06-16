@@ -3,6 +3,12 @@ package com.proyecto.notas.dto;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+/**
+ * DTO para recibir los datos de una nota en las solicitudes HTTP.
+ *
+ * El DTO solo contiene los campos necesarios para crear o actualizar una nota,
+ * y no incluye el identificador generado por la base de datos.
+ */
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor

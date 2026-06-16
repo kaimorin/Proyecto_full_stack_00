@@ -19,6 +19,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
+/**
+ * Controlador REST para el microservicio de notas.
+ *
+ * Gestiona las solicitudes HTTP entrantes relacionadas con operaciones CRUD
+ * sobre las notas de estudiantes.
+ */
 @RestController
 @RequestMapping("/api/notas")
 @Tag(name = "Notas", description = "API para gestionar notas de estudiantes")
@@ -27,6 +33,9 @@ public class NotasController {
     @Autowired
     private NotasService notasService;
 
+    /**
+     * Lista todas las notas existentes.
+     */
     @GetMapping
     @Operation(summary = "Listar todas las notas", description = "Obtiene la lista completa de todas las notas registradas")
     @ApiResponses({
@@ -39,6 +48,9 @@ public class NotasController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Devuelve una nota específica por su ID.
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Obtener nota por ID", description = "Obtiene una nota específica por su identificador")
     @ApiResponses({
@@ -53,6 +65,9 @@ public class NotasController {
                 .orElse(ResponseEntity.status(404).body(new com.proyecto.notas.dto.ApiResponse<>(404, "Nota no encontrada", null)));
     }
 
+    /**
+     * Crea una nueva nota a partir de los datos enviados en el cuerpo de la solicitud.
+     */
     @PostMapping
     @Operation(summary = "Crear nueva nota", description = "Registra una nueva nota para un estudiante")
     @ApiResponses({
@@ -71,6 +86,9 @@ public class NotasController {
         return ResponseEntity.status(201).body(response);
     }
 
+    /**
+     * Actualiza los datos de una nota existente.
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar nota", description = "Actualiza los datos de una nota existente")
     @ApiResponses({
@@ -96,6 +114,9 @@ public class NotasController {
         }).orElse(ResponseEntity.status(404).body(new com.proyecto.notas.dto.ApiResponse<>(404, "Nota no encontrada", null)));
     }
 
+    /**
+     * Elimina una nota por su ID.
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar nota", description = "Elimina una nota por su ID")
     @ApiResponses({
