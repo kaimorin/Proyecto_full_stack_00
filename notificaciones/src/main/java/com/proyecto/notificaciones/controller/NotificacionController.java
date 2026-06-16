@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class NotificacionController {
 
     @Autowired
-    pr ivate NotificacionService service;
+    private NotificacionService service;
 
     @GetMapping
     @Operation(summary = "Listar todas las notificaciones", description = "Obtiene la lista completa de notificaciones")
