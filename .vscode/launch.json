@@ -29,6 +29,16 @@
             "projectName": "login",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LeccionarioApplication<leccionario>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.proyecto.leccionario.LeccionarioApplication",
+            "projectName": "leccionario",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
