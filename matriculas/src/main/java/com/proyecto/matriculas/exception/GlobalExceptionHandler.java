@@ -73,6 +73,18 @@ public class GlobalExceptionHandler {
     }
 
     //maneja lo del service y otros errores
+        // Maneja cuando levantamos ResourceNotFoundException explícitamente
+        @ExceptionHandler(ResourceNotFoundException.class)
+        public ResponseEntity<ApiResponse<Object>> handleResourceNotFound(ResourceNotFoundException ex) {
+                String message = ex.getMessage();
+                if (message == null || message.isBlank()) {
+                        message = "Recurso no encontrado";
+                }
+                log.warn("Resource not found: {}", message);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                .body(new ApiResponse<>(404, message, null));
+        }
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiResponse<Object>> handleRuntimeException(
             RuntimeException ex) {
