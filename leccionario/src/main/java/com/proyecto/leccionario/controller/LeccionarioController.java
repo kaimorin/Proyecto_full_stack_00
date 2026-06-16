@@ -22,7 +22,7 @@ public class LeccionarioController {
 
     private final LeccionarioService service;
 
-    @GetMapping
+    @GetMapping("/list")
     @Operation(summary = "Listado de leccionarios", description = "Permite listar los leccionarios existentes")
     public ResponseEntity<ApiResponse<List<LeccionarioDto>>> listar() {
         try {
