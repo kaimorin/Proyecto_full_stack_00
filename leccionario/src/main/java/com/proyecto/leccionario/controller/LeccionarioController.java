@@ -61,7 +61,7 @@ public class LeccionarioController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/crear")
     @Operation(summary = "Crear nuevo leccionario", description = "Permite crear un nuevo leccionario")
     public ResponseEntity<ApiResponse<LeccionarioDto>> crear(@Valid @RequestBody LeccionarioDto leccionario) {
         try {
