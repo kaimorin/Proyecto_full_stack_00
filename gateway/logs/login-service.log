@@ -464,3 +464,277 @@ Action:
 
 Update your application's configuration
 
+2026-06-11 12:39:21 - Starting GatewayApplication using Java 21.0.10 with PID 23904 (C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway\target\classes started by SJ-Alumno in C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway)
+2026-06-11 12:39:21 - No active profile set, falling back to 1 default profile: "default"
+2026-06-11 12:39:21 - BeanFactory id=c9fcc6e1-3a52-31e7-927d-de25d3557a7d
+2026-06-11 12:39:21 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 12:39:21 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:39:21 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 12:39:21 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:39:21 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:39:22 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'nettyWriteResponseFilter' defined in class path resource [org/springframework/cloud/gateway/config/GatewayAutoConfiguration$NettyConfiguration.class]: Unsatisfied dependency expressed through method 'nettyWriteResponseFilter' parameter 0: Error creating bean with name 'gatewayProperties': Could not bind properties to 'GatewayProperties' : prefix=spring.cloud.gateway, ignoreInvalidFields=false, ignoreUnknownFields=true
+2026-06-11 12:39:22 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-11 12:39:22 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Binding to target org.springframework.cloud.gateway.config.GatewayProperties failed:
+
+    Property: spring.cloud.gateway.routes[0].uri
+    Value: "null"
+    Reason: no debe ser nulo
+
+
+Action:
+
+Update your application's configuration
+
+2026-06-11 12:49:34 - Starting GatewayApplication using Java 21.0.10 with PID 12612 (C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway\target\classes started by SJ-Alumno in C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway)
+2026-06-11 12:49:34 - No active profile set, falling back to 1 default profile: "default"
+2026-06-11 12:49:35 - BeanFactory id=c9fcc6e1-3a52-31e7-927d-de25d3557a7d
+2026-06-11 12:49:35 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 12:49:35 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:49:35 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 12:49:35 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:49:35 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [After]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [Before]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [Between]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [Cookie]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [Header]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [Host]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [Method]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [Path]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [Query]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [ReadBody]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [RemoteAddr]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [Weight]
+2026-06-11 12:49:35 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-06-11 12:49:36 - Eureka HTTP Client uses RestTemplate.
+2026-06-11 12:49:36 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-11 12:49:36 - Setting initial instance status as: STARTING
+2026-06-11 12:49:36 - Initializing Eureka in region us-east-1
+2026-06-11 12:49:36 - Resolving eureka endpoints via configuration
+2026-06-11 12:49:36 - Disable delta property : false
+2026-06-11 12:49:36 - Single vip registry refresh property : null
+2026-06-11 12:49:36 - Force full registry fetch : false
+2026-06-11 12:49:36 - Application is null : false
+2026-06-11 12:49:36 - Registered Applications size is zero : true
+2026-06-11 12:49:36 - Application version is -1: true
+2026-06-11 12:49:36 - Getting all instance registry info from the eureka server
+2026-06-11 12:49:36 - The response status is 200
+2026-06-11 12:49:36 - Starting heartbeat executor: renew interval is: 30
+2026-06-11 12:49:36 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-11 12:49:36 - Discovery Client initialized at timestamp 1781196576741 with initial instances count: 1
+2026-06-11 12:49:36 - Registering application GATEWAY with eureka with status UP
+2026-06-11 12:49:36 - Saw local status change event StatusChangeEvent [timestamp=1781196576745, current=UP, previous=STARTING]
+2026-06-11 12:49:36 - DiscoveryClient_GATEWAY/SJAPCS03LC0707.duoc.acad:gateway:9999: registering service...
+2026-06-11 12:49:36 - DiscoveryClient_GATEWAY/SJAPCS03LC0707.duoc.acad:gateway:9999 - registration status: 204
+2026-06-11 12:49:36 - Netty started on port 9999
+2026-06-11 12:49:36 - Updating port to 9999
+2026-06-11 12:49:36 - Started GatewayApplication in 2.738 seconds (process running for 3.244)
+2026-06-11 12:52:35 - Starting GatewayApplication using Java 21.0.10 with PID 25024 (C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway\target\classes started by SJ-Alumno in C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway)
+2026-06-11 12:52:35 - No active profile set, falling back to 1 default profile: "default"
+2026-06-11 12:52:35 - BeanFactory id=c9fcc6e1-3a52-31e7-927d-de25d3557a7d
+2026-06-11 12:52:35 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 12:52:35 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:52:35 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 12:52:35 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:52:35 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [After]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [Before]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [Between]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [Cookie]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [Header]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [Host]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [Method]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [Path]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [Query]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [ReadBody]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [RemoteAddr]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [Weight]
+2026-06-11 12:52:36 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-06-11 12:52:36 - Eureka HTTP Client uses RestTemplate.
+2026-06-11 12:52:36 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-11 12:52:36 - Setting initial instance status as: STARTING
+2026-06-11 12:52:36 - Initializing Eureka in region us-east-1
+2026-06-11 12:52:37 - Resolving eureka endpoints via configuration
+2026-06-11 12:52:37 - Disable delta property : false
+2026-06-11 12:52:37 - Single vip registry refresh property : null
+2026-06-11 12:52:37 - Force full registry fetch : false
+2026-06-11 12:52:37 - Application is null : false
+2026-06-11 12:52:37 - Registered Applications size is zero : true
+2026-06-11 12:52:37 - Application version is -1: true
+2026-06-11 12:52:37 - Getting all instance registry info from the eureka server
+2026-06-11 12:52:37 - The response status is 200
+2026-06-11 12:52:37 - Starting heartbeat executor: renew interval is: 30
+2026-06-11 12:52:37 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-11 12:52:37 - Discovery Client initialized at timestamp 1781196757311 with initial instances count: 0
+2026-06-11 12:52:37 - Registering application GATEWAY with eureka with status UP
+2026-06-11 12:52:37 - Saw local status change event StatusChangeEvent [timestamp=1781196757314, current=UP, previous=STARTING]
+2026-06-11 12:52:37 - DiscoveryClient_GATEWAY/SJAPCS03LC0707.duoc.acad:gateway:9999: registering service...
+2026-06-11 12:52:37 - DiscoveryClient_GATEWAY/SJAPCS03LC0707.duoc.acad:gateway:9999 - registration status: 204
+2026-06-11 12:52:37 - Netty started on port 9999
+2026-06-11 12:52:37 - Updating port to 9999
+2026-06-11 12:52:37 - Started GatewayApplication in 2.662 seconds (process running for 3.164)
+2026-06-11 12:53:07 - Disable delta property : false
+2026-06-11 12:53:07 - Single vip registry refresh property : null
+2026-06-11 12:53:07 - Force full registry fetch : false
+2026-06-11 12:53:07 - Application is null : false
+2026-06-11 12:53:07 - Registered Applications size is zero : true
+2026-06-11 12:53:07 - Application version is -1: false
+2026-06-11 12:53:07 - Getting all instance registry info from the eureka server
+2026-06-11 12:53:07 - The response status is 200
+2026-06-11 12:56:04 - Starting GatewayApplication using Java 21.0.10 with PID 3192 (C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway\target\classes started by SJ-Alumno in C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway)
+2026-06-11 12:56:04 - No active profile set, falling back to 1 default profile: "default"
+2026-06-11 12:56:05 - BeanFactory id=c9fcc6e1-3a52-31e7-927d-de25d3557a7d
+2026-06-11 12:56:05 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 12:56:05 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:56:05 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 12:56:05 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:56:05 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [After]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [Before]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [Between]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [Cookie]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [Header]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [Host]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [Method]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [Path]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [Query]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [ReadBody]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [RemoteAddr]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [Weight]
+2026-06-11 12:56:05 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-06-11 12:56:06 - Eureka HTTP Client uses RestTemplate.
+2026-06-11 12:56:06 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-11 12:56:06 - Setting initial instance status as: STARTING
+2026-06-11 12:56:06 - Initializing Eureka in region us-east-1
+2026-06-11 12:56:06 - Resolving eureka endpoints via configuration
+2026-06-11 12:56:06 - Disable delta property : false
+2026-06-11 12:56:06 - Single vip registry refresh property : null
+2026-06-11 12:56:06 - Force full registry fetch : false
+2026-06-11 12:56:06 - Application is null : false
+2026-06-11 12:56:06 - Registered Applications size is zero : true
+2026-06-11 12:56:06 - Application version is -1: true
+2026-06-11 12:56:06 - Getting all instance registry info from the eureka server
+2026-06-11 12:56:06 - The response status is 200
+2026-06-11 12:56:06 - Starting heartbeat executor: renew interval is: 30
+2026-06-11 12:56:06 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-11 12:56:06 - Discovery Client initialized at timestamp 1781196966611 with initial instances count: 1
+2026-06-11 12:56:06 - Registering application GATEWAY with eureka with status UP
+2026-06-11 12:56:06 - Saw local status change event StatusChangeEvent [timestamp=1781196966614, current=UP, previous=STARTING]
+2026-06-11 12:56:06 - DiscoveryClient_GATEWAY/SJAPCS03LC0707.duoc.acad:gateway:9999: registering service...
+2026-06-11 12:56:06 - DiscoveryClient_GATEWAY/SJAPCS03LC0707.duoc.acad:gateway:9999 - registration status: 204
+2026-06-11 12:56:06 - Netty started on port 9999
+2026-06-11 12:56:06 - Updating port to 9999
+2026-06-11 12:56:06 - Started GatewayApplication in 2.719 seconds (process running for 3.223)
+2026-06-11 12:57:56 - Starting GatewayApplication using Java 21.0.10 with PID 7976 (C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway\target\classes started by SJ-Alumno in C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway)
+2026-06-11 12:57:56 - No active profile set, falling back to 1 default profile: "default"
+2026-06-11 12:57:56 - BeanFactory id=c9fcc6e1-3a52-31e7-927d-de25d3557a7d
+2026-06-11 12:57:56 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 12:57:56 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:57:56 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 12:57:56 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:57:56 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [After]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [Before]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [Between]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [Cookie]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [Header]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [Host]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [Method]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [Path]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [Query]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [ReadBody]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [RemoteAddr]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [Weight]
+2026-06-11 12:57:57 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-06-11 12:57:57 - Eureka HTTP Client uses RestTemplate.
+2026-06-11 12:57:57 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-11 12:57:57 - Setting initial instance status as: STARTING
+2026-06-11 12:57:57 - Initializing Eureka in region us-east-1
+2026-06-11 12:57:58 - Resolving eureka endpoints via configuration
+2026-06-11 12:57:58 - Disable delta property : false
+2026-06-11 12:57:58 - Single vip registry refresh property : null
+2026-06-11 12:57:58 - Force full registry fetch : false
+2026-06-11 12:57:58 - Application is null : false
+2026-06-11 12:57:58 - Registered Applications size is zero : true
+2026-06-11 12:57:58 - Application version is -1: true
+2026-06-11 12:57:58 - Getting all instance registry info from the eureka server
+2026-06-11 12:57:58 - The response status is 200
+2026-06-11 12:57:58 - Starting heartbeat executor: renew interval is: 30
+2026-06-11 12:57:58 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-11 12:57:58 - Discovery Client initialized at timestamp 1781197078381 with initial instances count: 2
+2026-06-11 12:57:58 - Registering application GATEWAY with eureka with status UP
+2026-06-11 12:57:58 - Saw local status change event StatusChangeEvent [timestamp=1781197078385, current=UP, previous=STARTING]
+2026-06-11 12:57:58 - DiscoveryClient_GATEWAY/SJAPCS03LC0707.duoc.acad:gateway:9999: registering service...
+2026-06-11 12:57:58 - DiscoveryClient_GATEWAY/SJAPCS03LC0707.duoc.acad:gateway:9999 - registration status: 204
+2026-06-11 12:57:58 - Netty started on port 9999
+2026-06-11 12:57:58 - Updating port to 9999
+2026-06-11 12:57:58 - Started GatewayApplication in 2.695 seconds (process running for 3.215)
+2026-06-11 13:04:09 - Starting GatewayApplication using Java 21.0.10 with PID 17080 (C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway\target\classes started by SJ-Alumno in C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\gateway)
+2026-06-11 13:04:09 - No active profile set, falling back to 1 default profile: "default"
+2026-06-11 13:04:10 - BeanFactory id=c9fcc6e1-3a52-31e7-927d-de25d3557a7d
+2026-06-11 13:04:10 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 13:04:10 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 13:04:10 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-06-11 13:04:10 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 13:04:10 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [After]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [Before]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [Between]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [Cookie]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [Header]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [Host]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [Method]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [Path]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [Query]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [ReadBody]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [RemoteAddr]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [Weight]
+2026-06-11 13:04:10 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-06-11 13:04:11 - Eureka HTTP Client uses RestTemplate.
+2026-06-11 13:04:11 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-11 13:04:11 - Setting initial instance status as: STARTING
+2026-06-11 13:04:11 - Initializing Eureka in region us-east-1
+2026-06-11 13:04:11 - Resolving eureka endpoints via configuration
+2026-06-11 13:04:11 - Disable delta property : false
+2026-06-11 13:04:11 - Single vip registry refresh property : null
+2026-06-11 13:04:11 - Force full registry fetch : false
+2026-06-11 13:04:11 - Application is null : false
+2026-06-11 13:04:11 - Registered Applications size is zero : true
+2026-06-11 13:04:11 - Application version is -1: true
+2026-06-11 13:04:11 - Getting all instance registry info from the eureka server
+2026-06-11 13:04:11 - The response status is 200
+2026-06-11 13:04:11 - Starting heartbeat executor: renew interval is: 30
+2026-06-11 13:04:11 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-11 13:04:11 - Discovery Client initialized at timestamp 1781197451659 with initial instances count: 0
+2026-06-11 13:04:11 - Registering application GATEWAY with eureka with status UP
+2026-06-11 13:04:11 - Saw local status change event StatusChangeEvent [timestamp=1781197451662, current=UP, previous=STARTING]
+2026-06-11 13:04:11 - DiscoveryClient_GATEWAY/SJAPCS03LC0707.duoc.acad:gateway:9999: registering service...
+2026-06-11 13:04:11 - DiscoveryClient_GATEWAY/SJAPCS03LC0707.duoc.acad:gateway:9999 - registration status: 204
+2026-06-11 13:04:11 - Netty started on port 9999
+2026-06-11 13:04:11 - Updating port to 9999
+2026-06-11 13:04:11 - Started GatewayApplication in 2.917 seconds (process running for 3.407)
+2026-06-11 13:04:23 - No servers available for service: login
+2026-06-11 13:04:37 - No servers available for service: login
+2026-06-11 13:04:41 - Disable delta property : false
+2026-06-11 13:04:41 - Single vip registry refresh property : null
+2026-06-11 13:04:41 - Force full registry fetch : false
+2026-06-11 13:04:41 - Application is null : false
+2026-06-11 13:04:41 - Registered Applications size is zero : true
+2026-06-11 13:04:41 - Application version is -1: false
+2026-06-11 13:04:41 - Getting all instance registry info from the eureka server
+2026-06-11 13:04:41 - The response status is 200
