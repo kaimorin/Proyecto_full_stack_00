@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.proyecto.notas.model.Notas;
 import com.proyecto.notas.dto.NotasDto;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import com.proyecto.notas.dto.ApiResponse; // Simplificado el import para limpiar el código
 import com.proyecto.notas.service.NotasService;
+import com.proyecto.notas.service.AuthService; // Importamos tu AuthService
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,18 +34,38 @@ public class NotasController {
     @Autowired
     private NotasService notasService;
 
+    @Autowired
+    private AuthService authService; // Inyección del servicio de Auth
+
+    /**
+     * Método auxiliar privado para validar el token Bearer en cada petición.
+     * Esto evita repetir el mismo "if" en todos los endpoints.
+     */
+    private boolean isTokenInvalid(String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return true;
+        }
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+        return validationResponse == null || validationResponse.getCode() != 200;
+    }
+
     /**
      * Lista todas las notas existentes.
      */
     @GetMapping
     @Operation(summary = "Listar todas las notas", description = "Obtiene la lista completa de todas las notas registradas")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Notas obtenidas exitosamente"),
-        @ApiResponse(responseCode = "401", description = "No autorizado")
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Notas obtenidos exitosamente"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "No autorizado")
     })
-    public ResponseEntity<com.proyecto.notas.dto.ApiResponse<List<Notas>>> listar() {
+    public ResponseEntity<ApiResponse<List<Notas>>> listar(@RequestHeader("Authorization") String authHeader) {
+        if (isTokenInvalid(authHeader)) {
+            return ResponseEntity.status(401).body(new ApiResponse<>(401, "Token inválido o no proporcionado", null));
+        }
+
         List<Notas> lista = notasService.listarTodas();
-        com.proyecto.notas.dto.ApiResponse<List<Notas>> response = new com.proyecto.notas.dto.ApiResponse<>(200, "Lista de notas obtenida con éxito", lista);
+        ApiResponse<List<Notas>> response = new ApiResponse<>(200, "Lista de notas obtenida con éxito", lista);
         return ResponseEntity.ok(response);
     }
 
@@ -54,15 +75,21 @@ public class NotasController {
     @GetMapping("/{id}")
     @Operation(summary = "Obtener nota por ID", description = "Obtiene una nota específica por su identificador")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Nota encontrada"),
-        @ApiResponse(responseCode = "404", description = "Nota no encontrada")
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Nota encontrada"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "No autorizado"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Nota no encontrada")
     })
-    public ResponseEntity<com.proyecto.notas.dto.ApiResponse<Notas>> obtener(
+    public ResponseEntity<ApiResponse<Notas>> obtener(
+            @RequestHeader("Authorization") String authHeader,
             @Parameter(description = "ID de la nota a obtener", required = true, example = "1")
             @PathVariable Long id) {
+        if (isTokenInvalid(authHeader)) {
+            return ResponseEntity.status(401).body(new ApiResponse<>(401, "Token inválido o no proporcionado", null));
+        }
+
         return notasService.buscarPorId(id)
-                .map(nota -> ResponseEntity.ok(new com.proyecto.notas.dto.ApiResponse<>(200, "Nota encontrada", nota)))
-                .orElse(ResponseEntity.status(404).body(new com.proyecto.notas.dto.ApiResponse<>(404, "Nota no encontrada", null)));
+                .map(nota -> ResponseEntity.ok(new ApiResponse<>(200, "Nota encontrada", nota)))
+                .orElse(ResponseEntity.status(404).body(new ApiResponse<>(404, "Nota no encontrada", null)));
     }
 
     /**
@@ -71,18 +98,24 @@ public class NotasController {
     @PostMapping
     @Operation(summary = "Crear nueva nota", description = "Registra una nueva nota para un estudiante")
     @ApiResponses({
-        @ApiResponse(responseCode = "201", description = "Nota creada exitosamente"),
-        @ApiResponse(responseCode = "400", description = "Datos inválidos")
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Nota creada exitosamente"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "No autorizado"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos")
     })
-    public ResponseEntity<com.proyecto.notas.dto.ApiResponse<Notas>> crear(
+    public ResponseEntity<ApiResponse<Notas>> crear(
+            @RequestHeader("Authorization") String authHeader,
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Datos de la nota a crear",
                     required = true,
                     content = @Content(schema = @Schema(implementation = NotasDto.class))
             )
             @Valid @RequestBody NotasDto notasDto) {
+        if (isTokenInvalid(authHeader)) {
+            return ResponseEntity.status(401).body(new ApiResponse<>(401, "Token inválido o no proporcionado", null));
+        }
+
         Notas nuevaNota = notasService.crearNota(notasDto);
-        com.proyecto.notas.dto.ApiResponse<Notas> response = new com.proyecto.notas.dto.ApiResponse<>(201, "Nota registrada exitosamente", nuevaNota);
+        ApiResponse<Notas> response = new ApiResponse<>(201, "Nota registrada exitosamente", nuevaNota);
         return ResponseEntity.status(201).body(response);
     }
 
@@ -92,11 +125,13 @@ public class NotasController {
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar nota", description = "Actualiza los datos de una nota existente")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Nota actualizada correctamente"),
-        @ApiResponse(responseCode = "404", description = "Nota no encontrada"),
-        @ApiResponse(responseCode = "400", description = "Datos inválidos")
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Nota actualizada correctamente"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "No autorizado"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Nota no encontrada"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos")
     })
-    public ResponseEntity<com.proyecto.notas.dto.ApiResponse<Notas>> actualizar(
+    public ResponseEntity<ApiResponse<Notas>> actualizar(
+            @RequestHeader("Authorization") String authHeader,
             @Parameter(description = "ID de la nota a actualizar", required = true, example = "1")
             @PathVariable Long id,
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -105,13 +140,17 @@ public class NotasController {
                     content = @Content(schema = @Schema(implementation = NotasDto.class))
             )
             @Valid @RequestBody NotasDto notasDto) {
+        if (isTokenInvalid(authHeader)) {
+            return ResponseEntity.status(401).body(new ApiResponse<>(401, "Token inválido o no proporcionado", null));
+        }
+
         return notasService.buscarPorId(id).map(notaExistente -> {
             notaExistente.setEstudiante(notasDto.getEstudiante());
             notaExistente.setAsignatura(notasDto.getAsignatura());
             notaExistente.setValor(notasDto.getValor());
             Notas actualizado = notasService.guardar(notaExistente);
-            return ResponseEntity.ok(new com.proyecto.notas.dto.ApiResponse<>(200, "Nota actualizada correctamente", actualizado));
-        }).orElse(ResponseEntity.status(404).body(new com.proyecto.notas.dto.ApiResponse<>(404, "Nota no encontrada", null)));
+            return ResponseEntity.ok(new ApiResponse<>(200, "Nota actualizada correctamente", actualizado));
+        }).orElse(ResponseEntity.status(404).body(new ApiResponse<>(404, "Nota no encontrada", null)));
     }
 
     /**
@@ -120,17 +159,22 @@ public class NotasController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar nota", description = "Elimina una nota por su ID")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Nota eliminada correctamente"),
-        @ApiResponse(responseCode = "404", description = "Nota no encontrada")
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Nota eliminada correctamente"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "No autorizado"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Nota no encontrada")
     })
-    public ResponseEntity<com.proyecto.notas.dto.ApiResponse<Void>> eliminar(
+    public ResponseEntity<ApiResponse<Void>> eliminar(
+            @RequestHeader("Authorization") String authHeader,
             @Parameter(description = "ID de la nota a eliminar", required = true, example = "1")
             @PathVariable Long id) {
+        if (isTokenInvalid(authHeader)) {
+            return ResponseEntity.status(401).body(new ApiResponse<>(401, "Token inválido o no proporcionado", null));
+        }
+
         if (notasService.buscarPorId(id).isPresent()) {
             notasService.eliminar(id);
-            return ResponseEntity.ok(new com.proyecto.notas.dto.ApiResponse<>(200, "Nota eliminada correctamente", null));
+            return ResponseEntity.ok(new ApiResponse<>(200, "Nota CLI eliminada correctamente", null));
         }
-        return ResponseEntity.status(404).body(new com.proyecto.notas.dto.ApiResponse<>(404, "Nota no encontrada", null));
+        return ResponseEntity.status(404).body(new ApiResponse<>(404, "Nota no encontrada", null));
     }
 }
-
