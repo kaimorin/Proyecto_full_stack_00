@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.proyecto.asistencia.dto.AsistenciaDTO;
 import com.proyecto.asistencia.model.Asistencia;
 import com.proyecto.asistencia.repository.AsistenciaRepository;
+import com.proyecto.asistencia.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -27,8 +28,8 @@ public class AsistenciaService {
 
     // Obtener registro de asistencia por ID
     public AsistenciaDTO getAsistenciaById(Long id) {
-        Asistencia a = asistenciaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Asistencia no encontrada con id: " + id));
+    Asistencia a = asistenciaRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Asistencia no encontrada con id: " + id));
         return new AsistenciaDTO(a.getFecha(), a.getEstadoAsistencia(), a.getRutAlumno());
     }
 
@@ -41,8 +42,8 @@ public class AsistenciaService {
 
     // Actualizar registro de asistencia
     public AsistenciaDTO updateAsistencia(Long id, AsistenciaDTO dto) {
-        Asistencia a = asistenciaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Asistencia no encontrada con id: " + id));
+    Asistencia a = asistenciaRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Asistencia no encontrada con id: " + id));
         a.setFecha(dto.getFecha());
         a.setEstadoAsistencia(dto.getEstadoAsistencia());
         a.setRutAlumno(dto.getRutAlumno());
