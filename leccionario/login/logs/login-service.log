@@ -1,0 +1,303 @@
+2026-06-11 12:38:45 - Starting LoginApplication using Java 21.0.10 with PID 14696 (C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\login\target\classes started by SJ-Alumno in C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\login)
+2026-06-11 12:38:45 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-11 12:38:45 - No active profile set, falling back to 1 default profile: "default"
+2026-06-11 12:38:47 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11 12:38:47 - Finished Spring Data repository scanning in 125 ms. Found 2 JPA repository interfaces.
+2026-06-11 12:38:47 - BeanFactory id=70595edd-c9b5-32c3-8d87-39415aed5176
+2026-06-11 12:38:48 - Tomcat initialized with port 9000 (http)
+2026-06-11 12:38:48 - Starting service [Tomcat]
+2026-06-11 12:38:48 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-11 12:38:48 - Root WebApplicationContext: initialization completed in 2301 ms
+2026-06-11 12:38:49 - HikariPool-1 - Starting...
+2026-06-11 12:38:49 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@38d4488c
+2026-06-11 12:38:49 - HikariPool-1 - Start completed.
+2026-06-11 12:38:49 - Database: jdbc:mysql://localhost:3306/login (MySQL 8.0)
+2026-06-11 12:38:49 - Successfully validated 2 migrations (execution time 00:00.021s)
+2026-06-11 12:38:49 - Current version of schema `login`: 2
+2026-06-11 12:38:49 - Schema `login` is up to date. No migration necessary.
+2026-06-11 12:38:49 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11 12:38:49 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-06-11 12:38:49 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11 12:38:49 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-11 12:38:49 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/login]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: login/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11 12:38:50 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11 12:38:50 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11 12:38:50 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11 12:38:50 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11 12:38:51 - Eureka HTTP Client uses RestClient.
+2026-06-11 12:38:51 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-11 12:38:51 - Exposing 1 endpoint beneath base path '/actuator'
+2026-06-11 12:38:51 - Setting initial instance status as: STARTING
+2026-06-11 12:38:51 - Initializing Eureka in region us-east-1
+2026-06-11 12:38:51 - Resolving eureka endpoints via configuration
+2026-06-11 12:38:51 - Disable delta property : false
+2026-06-11 12:38:51 - Single vip registry refresh property : null
+2026-06-11 12:38:51 - Force full registry fetch : false
+2026-06-11 12:38:51 - Application is null : false
+2026-06-11 12:38:51 - Registered Applications size is zero : true
+2026-06-11 12:38:51 - Application version is -1: true
+2026-06-11 12:38:51 - Getting all instance registry info from the eureka server
+2026-06-11 12:38:51 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11 12:38:51 - Initializing Servlet 'dispatcherServlet'
+2026-06-11 12:38:51 - Completed initialization in 1 ms
+2026-06-11 12:38:51 - The response status is 200
+2026-06-11 12:38:51 - Starting heartbeat executor: renew interval is: 30
+2026-06-11 12:38:51 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-11 12:38:51 - Discovery Client initialized at timestamp 1781195931740 with initial instances count: 0
+2026-06-11 12:38:51 - Registering application LOGIN with eureka with status UP
+2026-06-11 12:38:51 - Saw local status change event StatusChangeEvent [timestamp=1781195931747, current=UP, previous=STARTING]
+2026-06-11 12:38:51 - DiscoveryClient_LOGIN/SJAPCS03LC0707.duoc.acad:login:9000: registering service...
+2026-06-11 12:38:51 - Tomcat started on port 9000 (http) with context path '/'
+2026-06-11 12:38:51 - Updating port to 9000
+2026-06-11 12:38:51 - Started LoginApplication in 6.215 seconds (process running for 6.997)
+2026-06-11 12:38:51 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-06-11 12:38:51 - SpringDoc /swagger-ui/index.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-06-11 12:38:51 - DiscoveryClient_LOGIN/SJAPCS03LC0707.duoc.acad:login:9000 - registration status: 204
+2026-06-11 12:39:21 - Disable delta property : false
+2026-06-11 12:39:21 - Single vip registry refresh property : null
+2026-06-11 12:39:21 - Force full registry fetch : false
+2026-06-11 12:39:21 - Application is null : false
+2026-06-11 12:39:21 - Registered Applications size is zero : true
+2026-06-11 12:39:21 - Application version is -1: false
+2026-06-11 12:39:21 - Getting all instance registry info from the eureka server
+2026-06-11 12:39:21 - The response status is 200
+2026-06-11 12:40:10 - Error al registrar usuario: El usuario con este user: nuevoUsuario ya existe actualmente
+2026-06-11 12:43:51 - Resolving eureka endpoints via configuration
+2026-06-11 12:48:51 - Resolving eureka endpoints via configuration
+2026-06-11 12:52:26 - Starting LoginApplication using Java 21.0.10 with PID 25420 (C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\login\target\classes started by SJ-Alumno in C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\login)
+2026-06-11 12:52:26 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-11 12:52:26 - No active profile set, falling back to 1 default profile: "default"
+2026-06-11 12:52:27 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11 12:52:27 - Finished Spring Data repository scanning in 113 ms. Found 2 JPA repository interfaces.
+2026-06-11 12:52:27 - BeanFactory id=70595edd-c9b5-32c3-8d87-39415aed5176
+2026-06-11 12:52:28 - Tomcat initialized with port 9000 (http)
+2026-06-11 12:52:28 - Starting service [Tomcat]
+2026-06-11 12:52:28 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-11 12:52:28 - Root WebApplicationContext: initialization completed in 2034 ms
+2026-06-11 12:52:29 - HikariPool-1 - Starting...
+2026-06-11 12:52:29 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@115a7e51
+2026-06-11 12:52:29 - HikariPool-1 - Start completed.
+2026-06-11 12:52:29 - Database: jdbc:mysql://localhost:3306/login (MySQL 8.0)
+2026-06-11 12:52:29 - Successfully validated 2 migrations (execution time 00:00.023s)
+2026-06-11 12:52:29 - Current version of schema `login`: 2
+2026-06-11 12:52:29 - Schema `login` is up to date. No migration necessary.
+2026-06-11 12:52:29 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11 12:52:29 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-06-11 12:52:30 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11 12:52:30 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-11 12:52:30 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/login]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: login/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11 12:52:30 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11 12:52:30 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11 12:52:30 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11 12:52:30 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11 12:52:31 - Eureka HTTP Client uses RestClient.
+2026-06-11 12:52:31 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-11 12:52:31 - Exposing 1 endpoint beneath base path '/actuator'
+2026-06-11 12:52:31 - Setting initial instance status as: STARTING
+2026-06-11 12:52:31 - Initializing Eureka in region us-east-1
+2026-06-11 12:52:31 - Resolving eureka endpoints via configuration
+2026-06-11 12:52:31 - Disable delta property : false
+2026-06-11 12:52:31 - Single vip registry refresh property : null
+2026-06-11 12:52:31 - Force full registry fetch : false
+2026-06-11 12:52:31 - Application is null : false
+2026-06-11 12:52:31 - Registered Applications size is zero : true
+2026-06-11 12:52:31 - Application version is -1: true
+2026-06-11 12:52:31 - Getting all instance registry info from the eureka server
+2026-06-11 12:52:31 - The response status is 200
+2026-06-11 12:52:31 - Starting heartbeat executor: renew interval is: 30
+2026-06-11 12:52:31 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-11 12:52:31 - Discovery Client initialized at timestamp 1781196751862 with initial instances count: 0
+2026-06-11 12:52:31 - Registering application LOGIN with eureka with status UP
+2026-06-11 12:52:31 - Saw local status change event StatusChangeEvent [timestamp=1781196751866, current=UP, previous=STARTING]
+2026-06-11 12:52:31 - DiscoveryClient_LOGIN/SJAPCS03LC0707.duoc.acad:login:9000: registering service...
+2026-06-11 12:52:31 - Tomcat started on port 9000 (http) with context path '/'
+2026-06-11 12:52:31 - Updating port to 9000
+2026-06-11 12:52:31 - Started LoginApplication in 5.787 seconds (process running for 6.594)
+2026-06-11 12:52:31 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-06-11 12:52:31 - SpringDoc /swagger-ui/index.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-06-11 12:52:31 - DiscoveryClient_LOGIN/SJAPCS03LC0707.duoc.acad:login:9000 - registration status: 204
+2026-06-11 12:52:32 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11 12:52:32 - Initializing Servlet 'dispatcherServlet'
+2026-06-11 12:52:32 - Completed initialization in 1 ms
+2026-06-11 12:53:01 - Disable delta property : false
+2026-06-11 12:53:01 - Single vip registry refresh property : null
+2026-06-11 12:53:01 - Force full registry fetch : false
+2026-06-11 12:53:01 - Application is null : false
+2026-06-11 12:53:01 - Registered Applications size is zero : true
+2026-06-11 12:53:01 - Application version is -1: false
+2026-06-11 12:53:01 - Getting all instance registry info from the eureka server
+2026-06-11 12:53:01 - The response status is 200
+2026-06-11 12:53:02 - Error al registrar usuario: El usuario con este user: nuevoUsuario ya existe actualmente
+2026-06-11 12:54:19 - Error al registrar usuario: El usuario con este user: nuevoUsuario ya existe actualmente
+2026-06-11 12:55:53 - Starting LoginApplication using Java 21.0.10 with PID 26524 (C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\login\target\classes started by SJ-Alumno in C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\login)
+2026-06-11 12:55:53 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-11 12:55:53 - No active profile set, falling back to 1 default profile: "default"
+2026-06-11 12:55:54 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11 12:55:55 - Finished Spring Data repository scanning in 140 ms. Found 2 JPA repository interfaces.
+2026-06-11 12:55:55 - BeanFactory id=70595edd-c9b5-32c3-8d87-39415aed5176
+2026-06-11 12:55:56 - Tomcat initialized with port 9000 (http)
+2026-06-11 12:55:56 - Starting service [Tomcat]
+2026-06-11 12:55:56 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-11 12:55:56 - Root WebApplicationContext: initialization completed in 2211 ms
+2026-06-11 12:55:56 - HikariPool-1 - Starting...
+2026-06-11 12:55:57 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@d1d85d0
+2026-06-11 12:55:57 - HikariPool-1 - Start completed.
+2026-06-11 12:55:57 - Database: jdbc:mysql://localhost:3306/login (MySQL 8.0)
+2026-06-11 12:55:57 - Successfully validated 2 migrations (execution time 00:00.024s)
+2026-06-11 12:55:57 - Current version of schema `login`: 2
+2026-06-11 12:55:57 - Schema `login` is up to date. No migration necessary.
+2026-06-11 12:55:57 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11 12:55:57 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-06-11 12:55:57 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11 12:55:57 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-11 12:55:57 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/login]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: login/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11 12:55:58 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11 12:55:58 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11 12:55:58 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11 12:55:58 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11 12:55:58 - Eureka HTTP Client uses RestClient.
+2026-06-11 12:55:58 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-11 12:55:58 - Exposing 1 endpoint beneath base path '/actuator'
+2026-06-11 12:55:59 - Setting initial instance status as: STARTING
+2026-06-11 12:55:59 - Initializing Eureka in region us-east-1
+2026-06-11 12:55:59 - Resolving eureka endpoints via configuration
+2026-06-11 12:55:59 - Disable delta property : false
+2026-06-11 12:55:59 - Single vip registry refresh property : null
+2026-06-11 12:55:59 - Force full registry fetch : false
+2026-06-11 12:55:59 - Application is null : false
+2026-06-11 12:55:59 - Registered Applications size is zero : true
+2026-06-11 12:55:59 - Application version is -1: true
+2026-06-11 12:55:59 - Getting all instance registry info from the eureka server
+2026-06-11 12:55:59 - The response status is 200
+2026-06-11 12:55:59 - Starting heartbeat executor: renew interval is: 30
+2026-06-11 12:55:59 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-11 12:55:59 - Discovery Client initialized at timestamp 1781196959366 with initial instances count: 0
+2026-06-11 12:55:59 - Registering application LOGIN with eureka with status UP
+2026-06-11 12:55:59 - Saw local status change event StatusChangeEvent [timestamp=1781196959369, current=UP, previous=STARTING]
+2026-06-11 12:55:59 - DiscoveryClient_LOGIN/SJAPCS03LC0707.duoc.acad:login:9000: registering service...
+2026-06-11 12:55:59 - Tomcat started on port 9000 (http) with context path '/'
+2026-06-11 12:55:59 - Updating port to 9000
+2026-06-11 12:55:59 - Started LoginApplication in 5.8 seconds (process running for 6.588)
+2026-06-11 12:55:59 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-06-11 12:55:59 - SpringDoc /swagger-ui/index.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-06-11 12:55:59 - DiscoveryClient_LOGIN/SJAPCS03LC0707.duoc.acad:login:9000 - registration status: 204
+2026-06-11 12:55:59 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11 12:55:59 - Initializing Servlet 'dispatcherServlet'
+2026-06-11 12:55:59 - Completed initialization in 2 ms
+2026-06-11 12:56:17 - Error al registrar usuario: El usuario con este user: nuevoUsuario ya existe actualmente
+2026-06-11 12:56:29 - Disable delta property : false
+2026-06-11 12:56:29 - Single vip registry refresh property : null
+2026-06-11 12:56:29 - Force full registry fetch : false
+2026-06-11 12:56:29 - Application is null : false
+2026-06-11 12:56:29 - Registered Applications size is zero : true
+2026-06-11 12:56:29 - Application version is -1: false
+2026-06-11 12:56:29 - Getting all instance registry info from the eureka server
+2026-06-11 12:56:29 - The response status is 200
+2026-06-11 13:03:59 - Starting LoginApplication using Java 21.0.10 with PID 2896 (C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\login\target\classes started by SJ-Alumno in C:\Users\sj-alumno\Desktop\b\Proyecto_full_stack_00\login)
+2026-06-11 13:03:59 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-11 13:03:59 - No active profile set, falling back to 1 default profile: "default"
+2026-06-11 13:04:00 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11 13:04:00 - Finished Spring Data repository scanning in 108 ms. Found 2 JPA repository interfaces.
+2026-06-11 13:04:00 - BeanFactory id=70595edd-c9b5-32c3-8d87-39415aed5176
+2026-06-11 13:04:01 - Tomcat initialized with port 9000 (http)
+2026-06-11 13:04:01 - Starting service [Tomcat]
+2026-06-11 13:04:01 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-11 13:04:01 - Root WebApplicationContext: initialization completed in 2115 ms
+2026-06-11 13:04:02 - HikariPool-1 - Starting...
+2026-06-11 13:04:02 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3f71ae7f
+2026-06-11 13:04:02 - HikariPool-1 - Start completed.
+2026-06-11 13:04:02 - Database: jdbc:mysql://localhost:3306/login (MySQL 8.0)
+2026-06-11 13:04:02 - Successfully validated 2 migrations (execution time 00:00.023s)
+2026-06-11 13:04:02 - Current version of schema `login`: 2
+2026-06-11 13:04:02 - Schema `login` is up to date. No migration necessary.
+2026-06-11 13:04:02 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11 13:04:02 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-06-11 13:04:02 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11 13:04:02 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-11 13:04:02 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/login]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: login/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11 13:04:03 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11 13:04:03 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11 13:04:03 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11 13:04:03 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11 13:04:04 - Eureka HTTP Client uses RestClient.
+2026-06-11 13:04:04 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-11 13:04:04 - Exposing 1 endpoint beneath base path '/actuator'
+2026-06-11 13:04:04 - Setting initial instance status as: STARTING
+2026-06-11 13:04:04 - Initializing Eureka in region us-east-1
+2026-06-11 13:04:04 - Resolving eureka endpoints via configuration
+2026-06-11 13:04:04 - Disable delta property : false
+2026-06-11 13:04:04 - Single vip registry refresh property : null
+2026-06-11 13:04:04 - Force full registry fetch : false
+2026-06-11 13:04:04 - Application is null : false
+2026-06-11 13:04:04 - Registered Applications size is zero : true
+2026-06-11 13:04:04 - Application version is -1: true
+2026-06-11 13:04:04 - Getting all instance registry info from the eureka server
+2026-06-11 13:04:04 - The response status is 200
+2026-06-11 13:04:04 - Starting heartbeat executor: renew interval is: 30
+2026-06-11 13:04:04 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-11 13:04:04 - Discovery Client initialized at timestamp 1781197444594 with initial instances count: 0
+2026-06-11 13:04:04 - Registering application LOGIN with eureka with status UP
+2026-06-11 13:04:04 - Saw local status change event StatusChangeEvent [timestamp=1781197444598, current=UP, previous=STARTING]
+2026-06-11 13:04:04 - DiscoveryClient_LOGIN/SJAPCS03LC0707.duoc.acad:login:9000: registering service...
+2026-06-11 13:04:04 - Tomcat started on port 9000 (http) with context path '/'
+2026-06-11 13:04:04 - Updating port to 9000
+2026-06-11 13:04:04 - Started LoginApplication in 5.531 seconds (process running for 6.243)
+2026-06-11 13:04:04 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-06-11 13:04:04 - SpringDoc /swagger-ui/index.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-06-11 13:04:04 - DiscoveryClient_LOGIN/SJAPCS03LC0707.duoc.acad:login:9000 - registration status: 204
+2026-06-11 13:04:05 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11 13:04:05 - Initializing Servlet 'dispatcherServlet'
+2026-06-11 13:04:05 - Completed initialization in 1 ms
+2026-06-11 13:04:31 - Error al registrar usuario: El usuario con este user: nuevoUsuario ya existe actualmente
+2026-06-11 13:04:34 - Disable delta property : false
+2026-06-11 13:04:34 - Single vip registry refresh property : null
+2026-06-11 13:04:34 - Force full registry fetch : false
+2026-06-11 13:04:34 - Application is null : false
+2026-06-11 13:04:34 - Registered Applications size is zero : true
+2026-06-11 13:04:34 - Application version is -1: false
+2026-06-11 13:04:34 - Getting all instance registry info from the eureka server
+2026-06-11 13:04:34 - The response status is 200
