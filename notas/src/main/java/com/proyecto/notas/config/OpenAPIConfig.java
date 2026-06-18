@@ -7,9 +7,15 @@ import io.swagger.v3.oas.models.info.License;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configuración de OpenAPI / Swagger para documentar la API del microservicio de notas.
+ */
 @Configuration
 public class OpenAPIConfig {
 
+    /**
+     * Crea el objeto principal de OpenAPI con la información de la API.
+     */
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()

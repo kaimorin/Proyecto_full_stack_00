@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import com.proyecto.hojadevida.dto.HojaDeVidaDTO;
 import com.proyecto.hojadevida.model.HojaDeVida;
 import com.proyecto.hojadevida.repository.HojaDeVidaRepository;
+import com.proyecto.hojadevida.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class HojaDeVidaService {
 
     public HojaDeVidaDTO getHojaDeVidaById(Long id) {
         HojaDeVida h = hojaDeVidaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Hoja de vida no encontrada con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Hoja de vida no encontrada con id: " + id));
         return new HojaDeVidaDTO(h.getNombreCompleto(), h.getFechaNacimiento(), h.getRutAlumno(),
                 h.getDireccion(), h.getTelefonoApoderado(), h.getNombreApoderado(), h.getCurso());
     }
@@ -46,7 +47,7 @@ public class HojaDeVidaService {
 
     public HojaDeVidaDTO updateHojaDeVida(Long id, HojaDeVidaDTO dto) {
         HojaDeVida h = hojaDeVidaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No se pudo encontrar la hoja de vida del estudiante con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("No se pudo encontrar la hoja de vida del estudiante con id: " + id));
         h.setNombreCompleto(dto.getNombreCompleto());
         h.setFechaNacimiento(dto.getFechaNacimiento());
         h.setRutAlumno(dto.getRutAlumno());
@@ -61,7 +62,7 @@ public class HojaDeVidaService {
 
     public void deleteHojaDeVida(Long id) {
         hojaDeVidaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No se pudo encontrar la hoja de vida del estudiante con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("No se pudo encontrar la hoja de vida del estudiante con id: " + id));
         hojaDeVidaRepository.deleteById(id);
     }
 }

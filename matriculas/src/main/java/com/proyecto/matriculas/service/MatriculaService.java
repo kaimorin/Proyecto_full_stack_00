@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import com.proyecto.matriculas.dto.MatriculaDTO;
 import com.proyecto.matriculas.model.Matricula;
 import com.proyecto.matriculas.repository.MatriculaRepository;
+import com.proyecto.matriculas.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class MatriculaService {
 
     public MatriculaDTO getMatriculaById(Long id) {
         Matricula m = matriculaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Matrícula no encontrada con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Matrícula no encontrada con id: " + id));
         return new MatriculaDTO(m.getRunEstudiante(), m.getNombreEstudiante(), m.getCurso(), m.getEstado());
     }
 
@@ -40,7 +41,7 @@ public class MatriculaService {
     }
 public MatriculaDTO updateMatricula(Long id, MatriculaDTO dto) {
         Matricula m = matriculaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Matrícula no encontrada con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Matrícula no encontrada con id: " + id));
         m.setRunEstudiante(dto.getRunEstudiante());
         m.setNombreEstudiante(dto.getNombreEstudiante());
         m.setCurso(dto.getCurso());
@@ -52,7 +53,7 @@ public MatriculaDTO updateMatricula(Long id, MatriculaDTO dto) {
 
     public void deleteMatricula(Long id) {
         matriculaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Matrícula no encontrada con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Matrícula no encontrada con id: " + id));
         matriculaRepository.deleteById(id);
     }
 }

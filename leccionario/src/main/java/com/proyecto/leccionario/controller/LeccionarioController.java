@@ -3,7 +3,7 @@ package com.proyecto.leccionario.controller;
 import com.proyecto.leccionario.dto.ApiResponse;
 import com.proyecto.leccionario.dto.LeccionarioDto;
 import com.proyecto.leccionario.service.LeccionarioService;
-
+import com.proyecto.leccionario.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +21,19 @@ import java.util.Map;
 public class LeccionarioController {
 
     private final LeccionarioService service;
-
-    @GetMapping
+    private final AuthService authService;
+    @GetMapping("/list")
     @Operation(summary = "Listado de leccionarios", description = "Permite listar los leccionarios existentes")
-    public ResponseEntity<ApiResponse<List<LeccionarioDto>>> listar() {
+    public ResponseEntity<ApiResponse<List<LeccionarioDto>>> listar(@RequestHeader("Authorization") String authHeader) {
+
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            ApiResponse<List<LeccionarioDto>> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
         try {
             List<LeccionarioDto> lista = service.listarTodos();
             ApiResponse<List<LeccionarioDto>> response = new ApiResponse<>(200, "Listado de leccionarios", lista);
@@ -61,7 +70,7 @@ public class LeccionarioController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/crear")
     @Operation(summary = "Crear nuevo leccionario", description = "Permite crear un nuevo leccionario")
     public ResponseEntity<ApiResponse<LeccionarioDto>> crear(@Valid @RequestBody LeccionarioDto leccionario) {
         try {

@@ -5,6 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO para recibir los datos de una notificación en las solicitudes HTTP.
+ *
+ * Incluye solo los campos necesarios para crear una notificación.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "NotificacionesApplication",
+            "request": "launch",
+            "mainClass": "com.proyecto.notificaciones.NotificacionesApplication",
+            "projectName": "notificaciones"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-GatewayApplication<gateway>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
@@ -27,6 +34,26 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.proyecto.login.LoginApplication",
             "projectName": "login",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LeccionarioApplication<leccionario>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.proyecto.leccionario.LeccionarioApplication",
+            "projectName": "leccionario",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-NotasApplication<notas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.proyecto.notas.NotasApplication",
+            "projectName": "notas",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
