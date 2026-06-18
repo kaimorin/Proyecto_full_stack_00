@@ -448,3 +448,79 @@ com.netflix.discovery.shared.transport.TransportException: Cannot execute reques
 2026-06-18 12:06:21 - Application version is -1: false
 2026-06-18 12:06:21 - Getting all instance registry info from the eureka server
 2026-06-18 12:06:21 - The response status is 200
+2026-06-18 12:14:38 - Starting LoginApplication using Java 21.0.10 with PID 13580 (C:\Users\yvann\OneDrive\Documentos\Carpeta_principal\login\target\classes started by yo in C:\Users\yvann\OneDrive\Documentos\Carpeta_principal\login)
+2026-06-18 12:14:38 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-18 12:14:38 - No active profile set, falling back to 1 default profile: "default"
+2026-06-18 12:14:42 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-18 12:14:42 - Finished Spring Data repository scanning in 361 ms. Found 2 JPA repository interfaces.
+2026-06-18 12:14:43 - BeanFactory id=83626b47-9831-368c-a44c-395a74af597f
+2026-06-18 12:14:45 - Tomcat initialized with port 9000 (http)
+2026-06-18 12:14:45 - Starting service [Tomcat]
+2026-06-18 12:14:45 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-18 12:14:45 - Root WebApplicationContext: initialization completed in 6516 ms
+2026-06-18 12:14:46 - HikariPool-1 - Starting...
+2026-06-18 12:14:47 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6d45dd4
+2026-06-18 12:14:47 - HikariPool-1 - Start completed.
+2026-06-18 12:14:47 - Database: jdbc:mysql://localhost:3306/login (MySQL 8.4)
+2026-06-18 12:14:47 - Using MySQL 8.4 which is newer than the version Flyway has been verified with. The latest verified version of MySQL is 8.1.
+2026-06-18 12:14:47 - Successfully validated 2 migrations (execution time 00:00.126s)
+2026-06-18 12:14:48 - Current version of schema `login`: 2
+2026-06-18 12:14:48 - Schema `login` is up to date. No migration necessary.
+2026-06-18 12:14:48 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-18 12:14:48 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-06-18 12:14:49 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-18 12:14:50 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-18 12:14:50 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/login]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.4.3
+	Default catalog/schema: login/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-18 12:14:53 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-18 12:14:53 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-18 12:14:54 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-18 12:14:54 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-18 12:14:56 - Eureka HTTP Client uses RestClient.
+2026-06-18 12:14:56 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-18 12:14:56 - Exposing 1 endpoint beneath base path '/actuator'
+2026-06-18 12:14:57 - Setting initial instance status as: STARTING
+2026-06-18 12:14:57 - Initializing Eureka in region us-east-1
+2026-06-18 12:14:57 - Resolving eureka endpoints via configuration
+2026-06-18 12:14:57 - Disable delta property : false
+2026-06-18 12:14:57 - Single vip registry refresh property : null
+2026-06-18 12:14:57 - Force full registry fetch : false
+2026-06-18 12:14:57 - Application is null : false
+2026-06-18 12:14:57 - Registered Applications size is zero : true
+2026-06-18 12:14:57 - Application version is -1: true
+2026-06-18 12:14:57 - Getting all instance registry info from the eureka server
+2026-06-18 12:14:57 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-18 12:14:57 - Initializing Servlet 'dispatcherServlet'
+2026-06-18 12:14:57 - Completed initialization in 3 ms
+2026-06-18 12:14:58 - The response status is 200
+2026-06-18 12:14:58 - Starting heartbeat executor: renew interval is: 30
+2026-06-18 12:14:58 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-18 12:14:58 - Discovery Client initialized at timestamp 1781799298571 with initial instances count: 0
+2026-06-18 12:14:58 - Registering application LOGIN with eureka with status UP
+2026-06-18 12:14:58 - Saw local status change event StatusChangeEvent [timestamp=1781799298579, current=UP, previous=STARTING]
+2026-06-18 12:14:58 - DiscoveryClient_LOGIN/10.15.217.37:login:9000: registering service...
+2026-06-18 12:14:58 - Tomcat started on port 9000 (http) with context path '/'
+2026-06-18 12:14:58 - Updating port to 9000
+2026-06-18 12:14:58 - Started LoginApplication in 22.485 seconds (process running for 24.557)
+2026-06-18 12:14:58 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-06-18 12:14:58 - SpringDoc /swagger-ui/index.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-06-18 12:14:58 - DiscoveryClient_LOGIN/10.15.217.37:login:9000 - registration status: 204
+2026-06-18 12:15:28 - Disable delta property : false
+2026-06-18 12:15:28 - Single vip registry refresh property : null
+2026-06-18 12:15:28 - Force full registry fetch : false
+2026-06-18 12:15:28 - Application is null : false
+2026-06-18 12:15:28 - Registered Applications size is zero : true
+2026-06-18 12:15:28 - Application version is -1: false
+2026-06-18 12:15:28 - Getting all instance registry info from the eureka server
+2026-06-18 12:15:28 - The response status is 200
+2026-06-18 12:19:57 - Resolving eureka endpoints via configuration
