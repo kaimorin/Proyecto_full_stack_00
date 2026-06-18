@@ -1,11 +1,11 @@
-package com.proyecto.hojadevida.config;
+package com.proyecto.reuniones.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.proyecto.hojadevida.service.AuthService;
+import com.proyecto.reuniones.service.AuthService;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;

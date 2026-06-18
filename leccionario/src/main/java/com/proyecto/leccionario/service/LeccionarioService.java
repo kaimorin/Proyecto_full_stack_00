@@ -45,6 +45,11 @@ public class LeccionarioService {
     }
 
     public void eliminar(Long id) {
+
+        repository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("No se encontró el leccionario"));
+
         repository.deleteById(id);
     }
 
