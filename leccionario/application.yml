@@ -1,8 +1,8 @@
 spring:
     application:
-        name: login
+        name: leccionario
     datasource:
-        url: jdbc:mysql://localhost:3306/login
+        url: jdbc:mysql://localhost:3306/leccionario
         username: root
         password: 
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,7 +15,7 @@ spring:
         locations: classpath:db/migration
 
 server:
-    port: 9000
+    port: 9008
 
 eureka:
     client:
@@ -30,9 +30,9 @@ eureka:
 logging:   
     level:
         root: INFO
-        com.proyecto.login: DEBUG
+        com.proyecto.leccionario: DEBUG
     file:
-        name: logs/login-service.log
+        name: logs/leccionario-service.log
     pattern:
         console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
         file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
@@ -42,12 +42,3 @@ springdoc:
         path: /v3/api-docs
     swagger-ui:
         path: /swagger-ui/index.html
-
-#management:
-    ##endpoints:
-        ##web:
-            ##exposure: health, info 
-    ##endpoint:
-        ##health:
-            ##show-details: always
-                

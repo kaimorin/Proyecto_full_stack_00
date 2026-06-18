@@ -1,5 +1,5 @@
 package com.proyecto.login.controller;
-import com.proyecto.login.service.UserService;
+import com.proyecto.login.Service.UserService;
 import com.proyecto.login.dto.ApiResponse;
 import com.proyecto.login.dto.RoleDTO;
 import com.proyecto.login.dto.UserCreateDTO;
@@ -52,11 +52,11 @@ public class UserController {
     @PostMapping("/login")
     @Operation(summary = "Iniciar sesión", description = "Valida las credenciales del usuario y permite el acceso")
     public ResponseEntity<ApiResponse<String>> login(@Valid @RequestBody UserCredentialsDTO dto) {
-        String token = userService.login(dto.getUsername(), dto.getPassword());
+        boolean success = userService.login(dto.getUsername(), dto.getPassword());
 
-        if (token != null) {
+        if (success) {
             ApiResponse<String> response =
-                    new ApiResponse<>(200, "Login exitoso", token);
+                    new ApiResponse<>(200, "Login exitoso", "Bienvenido " + dto.getUsername());
             return ResponseEntity.ok(response);
         } else {
             ApiResponse<String> response =
