@@ -44,6 +44,9 @@ public class UserService {
         }
         return null;
     }
+    public boolean validateToken(String token) {
+        return jwtUtil.validateToken(token);
+    }
 
     public List<UserDTO> getAllUsersDTO() {
         return repositoryUser.findAll()

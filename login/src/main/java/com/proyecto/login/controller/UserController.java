@@ -73,4 +73,20 @@ public class UserController {
                 new ApiResponse<>(200, "Listado de usuarios", users);
         return ResponseEntity.ok(response);
     }
+     @GetMapping("/validate")
+    @Operation(summary = "Validar token", description = "Permite validar un token de autenticación para verificar su validez.")
+    public ResponseEntity<ApiResponse<String>> validateToken(@RequestParam String token) {
+        boolean valid = userService.validateToken(token);
+
+        if (valid) {
+            ApiResponse<String> response =
+                    new ApiResponse<>(200, "Token válido", "OK");
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<String> response =
+                    new ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(response);
+        }
+    }
+
 }
