@@ -2,22 +2,44 @@ package com.proyecto.asistencia.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.proyecto.asistencia.service.AuthService;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+
+
+
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    private final AuthService authService;
 
-        http
-            .csrf(csrf -> csrf.disable())
+    public SecurityConfig(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/v1/asistencia/list2").permitAll()
+                .requestMatchers(
+                    "/v3/api-docs",
+                    "/v3/api-docs/**",
+                    "/swagger-ui/**",
+                    "/swagger-ui.html",
+                    "/swagger-ui/index.html",
+                    "/webjars/**"
+                ).permitAll()
                 .anyRequest().authenticated()
             )
-            .httpBasic(Customizer.withDefaults());
+            .addFilterBefore(new TokenValidationFilter(authService),
+                             UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
