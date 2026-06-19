@@ -10,9 +10,12 @@ import lombok.*;
  * y no incluye el identificador generado por la base de datos.
  */
 @Getter @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class NotasDto {
+
+    private Long id;
 
     @NotBlank(message = "El nombre del estudiante es obligatorio")
     private String estudiante;
