@@ -46,7 +46,16 @@ public class LeccionarioController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Buscar leccionario por ID", description = "Permite buscar por ID un leccionario específico")
-    public ResponseEntity<ApiResponse<LeccionarioDto>> obtener(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<LeccionarioDto>> obtener(@RequestHeader("Authorization") String authHeader,@PathVariable Long id) {
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            ApiResponse<LeccionarioDto> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
+
         try {
             return service.obtenerPorId(id)
                     .map(leccionario -> ResponseEntity.ok(new ApiResponse<>(200, "Leccionario encontrado", leccionario)))
@@ -59,7 +68,15 @@ public class LeccionarioController {
 
     @GetMapping("/buscar")
     @Operation(summary = "Buscar leccionario por asignatura", description = "Permite buscar leccionario por asignatura")
-    public ResponseEntity<ApiResponse<LeccionarioDto>> buscar(@RequestParam String asignatura) {
+    public ResponseEntity<ApiResponse<LeccionarioDto>> buscar(@RequestHeader("Authorization") String authHeader,@RequestParam String asignatura) {
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            ApiResponse<LeccionarioDto> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
         try {
             return service.obtenerPorAsignatura(asignatura)
                     .map(leccionario -> ResponseEntity.ok(new ApiResponse<>(200, "Leccionario encontrado", leccionario)))
@@ -72,7 +89,16 @@ public class LeccionarioController {
 
     @PostMapping("/crear")
     @Operation(summary = "Crear nuevo leccionario", description = "Permite crear un nuevo leccionario")
-    public ResponseEntity<ApiResponse<LeccionarioDto>> crear(@Valid @RequestBody LeccionarioDto leccionario) {
+    public ResponseEntity<ApiResponse<LeccionarioDto>> crear(@RequestHeader("Authorization") String authHeader, @Valid @RequestBody LeccionarioDto leccionario) {
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            ApiResponse<LeccionarioDto> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
+
         try {
             LeccionarioDto creado = service.crear(leccionario);
             ApiResponse<LeccionarioDto> response = new ApiResponse<>(201, "Leccionario creado", creado);
@@ -85,7 +111,16 @@ public class LeccionarioController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar leccionario", description = "Permite actualizar los datos del leccionario")
-    public ResponseEntity<ApiResponse<LeccionarioDto>> actualizar(@PathVariable Long id, @Valid @RequestBody LeccionarioDto lec) {
+    public ResponseEntity<ApiResponse<LeccionarioDto>> actualizar(@RequestHeader("Authorization") String authHeader, @PathVariable Long id, @Valid @RequestBody LeccionarioDto lec) {
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            ApiResponse<LeccionarioDto> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
+
         try {
             LeccionarioDto actualizado = service.actualizar(id, lec);
             ApiResponse<LeccionarioDto> response = new ApiResponse<>(200, "Leccionario actualizado", actualizado);
@@ -101,7 +136,16 @@ public class LeccionarioController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar leccionario por ID", description = "Permite eliminar por ID un leccionario específico")
-    public ResponseEntity<ApiResponse<Void>> eliminar(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<Void>> eliminar(@RequestHeader("Authorization") String authHeader, @PathVariable Long id) {
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            ApiResponse<Void> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
+
         try {
             service.eliminar(id);
             ApiResponse<Void> response = new ApiResponse<>(200, "Leccionario eliminado", null);
