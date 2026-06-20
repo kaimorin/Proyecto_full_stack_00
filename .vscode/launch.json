@@ -56,6 +56,49 @@
             "projectName": "notas",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-NotasApplication<com.proyecto-notas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.proyecto.notas.NotasApplication",
+            "projectName": "com.proyecto-notas",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=59743 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=com.proyecto-notas"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaApplication<com.proyecto-eureka>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.proyecto.eureka.EurekaApplication",
+            "projectName": "com.proyecto-eureka",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=49375 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=com.proyecto-eureka"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LoginApplication<com.proyecto-login>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.proyecto.login.LoginApplication",
+            "projectName": "com.proyecto-login",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=57018 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=com.proyecto-login"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AsistenciaApplication<com.proyecto-leccionario>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.proyecto.asistencia.AsistenciaApplication",
+            "projectName": "com.proyecto-leccionario",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

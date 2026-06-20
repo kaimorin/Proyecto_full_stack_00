@@ -524,3 +524,418 @@ com.netflix.discovery.shared.transport.TransportException: Cannot execute reques
 2026-06-18 12:15:28 - Getting all instance registry info from the eureka server
 2026-06-18 12:15:28 - The response status is 200
 2026-06-18 12:19:57 - Resolving eureka endpoints via configuration
+2026-06-19 19:11:40 - Starting LoginApplication using Java 21.0.11 with PID 24584 (C:\Users\Diego\Desktop\PROYECTO\Proyecto_full_stack_00\login\target\classes started by Diego in C:\Users\Diego\Desktop\PROYECTO\Proyecto_full_stack_00\login)
+2026-06-19 19:11:40 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-19 19:11:40 - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 19:11:42 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 19:11:42 - Finished Spring Data repository scanning in 120 ms. Found 2 JPA repository interfaces.
+2026-06-19 19:11:42 - BeanFactory id=83626b47-9831-368c-a44c-395a74af597f
+2026-06-19 19:11:42 - Tomcat initialized with port 9000 (http)
+2026-06-19 19:11:42 - Starting service [Tomcat]
+2026-06-19 19:11:42 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-19 19:11:43 - Root WebApplicationContext: initialization completed in 1962 ms
+2026-06-19 19:11:43 - HikariPool-1 - Starting...
+2026-06-19 19:11:44 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'flywayInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: Unknown database 'login'
+-------------------------------------------------------------------
+SQL State  : 42000
+Error Code : 1049
+Message    : Unknown database 'login'
+
+2026-06-19 19:11:44 - Stopping service [Tomcat]
+2026-06-19 19:11:44 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-19 19:11:44 - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'flywayInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: Unknown database 'login'
+-------------------------------------------------------------------
+SQL State  : 42000
+Error Code : 1049
+Message    : Unknown database 'login'
+
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.proyecto.login.LoginApplication.main(LoginApplication.java:10)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: Unknown database 'login'
+-------------------------------------------------------------------
+SQL State  : 42000
+Error Code : 1049
+Message    : Unknown database 'login'
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309)
+	... 10 common frames omitted
+Caused by: org.flywaydb.core.internal.exception.sqlExceptions.FlywaySqlUnableToConnectToDbException: Unable to obtain connection from database: Unknown database 'login'
+-------------------------------------------------------------------
+SQL State  : 42000
+Error Code : 1049
+Message    : Unknown database 'login'
+
+	at org.flywaydb.core.internal.jdbc.JdbcUtils.openConnection(JdbcUtils.java:70)
+	at org.flywaydb.core.internal.jdbc.JdbcConnectionFactory.<init>(JdbcConnectionFactory.java:76)
+	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:142)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:186)
+	at org.springframework.boot.flyway.autoconfigure.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:67)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813)
+	... 17 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Unknown database 'login'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:840)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:416)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:180)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:97)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
+	at org.flywaydb.core.internal.jdbc.JdbcUtils.openConnection(JdbcUtils.java:65)
+	... 23 common frames omitted
+2026-06-19 19:12:11 - Starting LoginApplication using Java 21.0.11 with PID 19720 (C:\Users\Diego\Desktop\PROYECTO\Proyecto_full_stack_00\login\target\classes started by Diego in c:\Users\Diego\Desktop\PROYECTO\Proyecto_full_stack_00\login)
+2026-06-19 19:12:11 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-19 19:12:11 - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 19:12:12 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 19:12:12 - Finished Spring Data repository scanning in 124 ms. Found 2 JPA repository interfaces.
+2026-06-19 19:12:13 - BeanFactory id=83626b47-9831-368c-a44c-395a74af597f
+2026-06-19 19:12:13 - Tomcat initialized with port 9000 (http)
+2026-06-19 19:12:13 - Starting service [Tomcat]
+2026-06-19 19:12:13 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-19 19:12:13 - Root WebApplicationContext: initialization completed in 1970 ms
+2026-06-19 19:12:14 - HikariPool-1 - Starting...
+2026-06-19 19:12:15 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'flywayInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: Unknown database 'login'
+-------------------------------------------------------------------
+SQL State  : 42000
+Error Code : 1049
+Message    : Unknown database 'login'
+
+2026-06-19 19:12:15 - Stopping service [Tomcat]
+2026-06-19 19:12:15 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-19 19:12:15 - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'flywayInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: Unknown database 'login'
+-------------------------------------------------------------------
+SQL State  : 42000
+Error Code : 1049
+Message    : Unknown database 'login'
+
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.proyecto.login.LoginApplication.main(LoginApplication.java:10)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: Unknown database 'login'
+-------------------------------------------------------------------
+SQL State  : 42000
+Error Code : 1049
+Message    : Unknown database 'login'
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309)
+	... 10 common frames omitted
+Caused by: org.flywaydb.core.internal.exception.sqlExceptions.FlywaySqlUnableToConnectToDbException: Unable to obtain connection from database: Unknown database 'login'
+-------------------------------------------------------------------
+SQL State  : 42000
+Error Code : 1049
+Message    : Unknown database 'login'
+
+	at org.flywaydb.core.internal.jdbc.JdbcUtils.openConnection(JdbcUtils.java:70)
+	at org.flywaydb.core.internal.jdbc.JdbcConnectionFactory.<init>(JdbcConnectionFactory.java:76)
+	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:142)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:186)
+	at org.springframework.boot.flyway.autoconfigure.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:67)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813)
+	... 17 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Unknown database 'login'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:840)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:416)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:180)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:97)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
+	at org.flywaydb.core.internal.jdbc.JdbcUtils.openConnection(JdbcUtils.java:65)
+	... 23 common frames omitted
+2026-06-19 19:12:59 - Starting LoginApplication using Java 21.0.11 with PID 25912 (C:\Users\Diego\Desktop\PROYECTO\Proyecto_full_stack_00\login\target\classes started by Diego in c:\Users\Diego\Desktop\PROYECTO\Proyecto_full_stack_00\login)
+2026-06-19 19:12:59 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-19 19:12:59 - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 19:13:00 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 19:13:00 - Finished Spring Data repository scanning in 122 ms. Found 2 JPA repository interfaces.
+2026-06-19 19:13:00 - BeanFactory id=83626b47-9831-368c-a44c-395a74af597f
+2026-06-19 19:13:01 - Tomcat initialized with port 9000 (http)
+2026-06-19 19:13:01 - Starting service [Tomcat]
+2026-06-19 19:13:01 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-19 19:13:01 - Root WebApplicationContext: initialization completed in 1866 ms
+2026-06-19 19:13:01 - HikariPool-1 - Starting...
+2026-06-19 19:13:02 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@f9cd1e6
+2026-06-19 19:13:02 - HikariPool-1 - Start completed.
+2026-06-19 19:13:02 - Database: jdbc:mysql://localhost:3306/login (MySQL 8.4)
+2026-06-19 19:13:02 - Using MySQL 8.4 which is newer than the version Flyway has been verified with. The latest verified version of MySQL is 8.1.
+2026-06-19 19:13:02 - Schema history table `login`.`flyway_schema_history` does not exist yet
+2026-06-19 19:13:02 - Successfully validated 2 migrations (execution time 00:00.042s)
+2026-06-19 19:13:02 - Creating Schema History table `login`.`flyway_schema_history` ...
+2026-06-19 19:13:02 - Current version of schema `login`: << Empty Schema >>
+2026-06-19 19:13:02 - Migrating schema `login` to version "1 - create users table"
+2026-06-19 19:13:02 - Migrating schema `login` to version "2 - insert users"
+2026-06-19 19:13:02 - Successfully applied 2 migrations to schema `login`, now at version v2 (execution time 00:00.062s)
+2026-06-19 19:13:02 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-19 19:13:02 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-06-19 19:13:02 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 19:13:03 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 19:13:03 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/login]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.4.3
+	Default catalog/schema: login/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-19 19:13:03 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 19:13:03 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 19:13:03 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userController': Resolution of declared constructors on bean Class [com.proyecto.login.controller.UserController] from ClassLoader [jdk.internal.loader.ClassLoaders$AppClassLoader@2c7b84de] failed
+2026-06-19 19:13:03 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 19:13:03 - HikariPool-1 - Shutdown initiated...
+2026-06-19 19:13:03 - HikariPool-1 - Shutdown completed.
+2026-06-19 19:13:03 - Stopping service [Tomcat]
+2026-06-19 19:13:03 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-19 19:13:03 - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userController': Resolution of declared constructors on bean Class [com.proyecto.login.controller.UserController] from ClassLoader [jdk.internal.loader.ClassLoaders$AppClassLoader@2c7b84de] failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:368)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1321)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1218)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.proyecto.login.LoginApplication.main(LoginApplication.java:10)
+Caused by: java.lang.NoClassDefFoundError: UserService
+	at java.base/java.lang.Class.getDeclaredConstructors0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredConstructors(Class.java:3551)
+	at java.base/java.lang.Class.getDeclaredConstructors(Class.java:2729)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:363)
+	... 20 common frames omitted
+Caused by: java.lang.ClassNotFoundException: UserService
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 24 common frames omitted
+2026-06-19 19:16:44 - Starting LoginApplication using Java 21.0.11 with PID 19736 (C:\Users\Diego\Desktop\PROYECTO\Proyecto_full_stack_00\login\target\classes started by Diego in c:\Users\Diego\Desktop\PROYECTO\Proyecto_full_stack_00\login)
+2026-06-19 19:16:44 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-19 19:16:44 - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 19:16:45 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 19:16:45 - Finished Spring Data repository scanning in 120 ms. Found 2 JPA repository interfaces.
+2026-06-19 19:16:46 - BeanFactory id=83626b47-9831-368c-a44c-395a74af597f
+2026-06-19 19:16:46 - Tomcat initialized with port 9000 (http)
+2026-06-19 19:16:46 - Starting service [Tomcat]
+2026-06-19 19:16:46 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-19 19:16:46 - Root WebApplicationContext: initialization completed in 1890 ms
+2026-06-19 19:16:47 - HikariPool-1 - Starting...
+2026-06-19 19:16:47 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7f8f5d37
+2026-06-19 19:16:47 - HikariPool-1 - Start completed.
+2026-06-19 19:16:47 - Database: jdbc:mysql://localhost:3306/login (MySQL 8.4)
+2026-06-19 19:16:47 - Using MySQL 8.4 which is newer than the version Flyway has been verified with. The latest verified version of MySQL is 8.1.
+2026-06-19 19:16:47 - Successfully validated 2 migrations (execution time 00:00.038s)
+2026-06-19 19:16:47 - Current version of schema `login`: 2
+2026-06-19 19:16:47 - Schema `login` is up to date. No migration necessary.
+2026-06-19 19:16:47 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-19 19:16:47 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-06-19 19:16:48 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 19:16:48 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 19:16:48 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/login]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.4.3
+	Default catalog/schema: login/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-19 19:16:48 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 19:16:48 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 19:16:49 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 19:16:49 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 19:16:50 - Eureka HTTP Client uses RestClient.
+2026-06-19 19:16:50 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-19 19:16:50 - Exposing 1 endpoint beneath base path '/actuator'
+2026-06-19 19:16:50 - Setting initial instance status as: STARTING
+2026-06-19 19:16:50 - Initializing Eureka in region us-east-1
+2026-06-19 19:16:50 - Resolving eureka endpoints via configuration
+2026-06-19 19:16:50 - Disable delta property : false
+2026-06-19 19:16:50 - Single vip registry refresh property : null
+2026-06-19 19:16:50 - Force full registry fetch : false
+2026-06-19 19:16:50 - Application is null : false
+2026-06-19 19:16:50 - Registered Applications size is zero : true
+2026-06-19 19:16:50 - Application version is -1: true
+2026-06-19 19:16:50 - Getting all instance registry info from the eureka server
+2026-06-19 19:16:50 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19 19:16:50 - Initializing Servlet 'dispatcherServlet'
+2026-06-19 19:16:50 - Completed initialization in 3 ms
+2026-06-19 19:16:50 - The response status is 200
+2026-06-19 19:16:50 - Starting heartbeat executor: renew interval is: 30
+2026-06-19 19:16:50 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-19 19:16:50 - Discovery Client initialized at timestamp 1781911010648 with initial instances count: 0
+2026-06-19 19:16:50 - Registering application LOGIN with eureka with status UP
+2026-06-19 19:16:50 - Saw local status change event StatusChangeEvent [timestamp=1781911010657, current=UP, previous=STARTING]
+2026-06-19 19:16:50 - DiscoveryClient_LOGIN/DESKTOP-9D8JIJM:login:9000: registering service...
+2026-06-19 19:16:50 - Tomcat started on port 9000 (http) with context path '/'
+2026-06-19 19:16:50 - Updating port to 9000
+2026-06-19 19:16:50 - Started LoginApplication in 6.463 seconds (process running for 7.154)
+2026-06-19 19:16:50 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-06-19 19:16:50 - SpringDoc /swagger-ui/index.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-06-19 19:16:50 - DiscoveryClient_LOGIN/DESKTOP-9D8JIJM:login:9000 - registration status: 204
+2026-06-19 19:17:20 - Disable delta property : false
+2026-06-19 19:17:20 - Single vip registry refresh property : null
+2026-06-19 19:17:20 - Force full registry fetch : false
+2026-06-19 19:17:20 - Application is null : false
+2026-06-19 19:17:20 - Registered Applications size is zero : true
+2026-06-19 19:17:20 - Application version is -1: false
+2026-06-19 19:17:20 - Getting all instance registry info from the eureka server
+2026-06-19 19:17:20 - The response status is 200
+2026-06-19 19:21:50 - Resolving eureka endpoints via configuration
+2026-06-19 19:26:50 - Resolving eureka endpoints via configuration
+2026-06-19 19:31:50 - Resolving eureka endpoints via configuration
+2026-06-19 19:36:50 - Resolving eureka endpoints via configuration
+2026-06-19 19:41:50 - Resolving eureka endpoints via configuration
+2026-06-19 19:47:56 - Starting LoginApplication using Java 21.0.11 with PID 3580 (C:\Users\Diego\Desktop\PROYECTO\Proyecto_full_stack_00\login\target\classes started by Diego in c:\Users\Diego\Desktop\PROYECTO\Proyecto_full_stack_00\login)
+2026-06-19 19:47:56 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-19 19:47:56 - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 19:47:57 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 19:47:58 - Finished Spring Data repository scanning in 126 ms. Found 2 JPA repository interfaces.
+2026-06-19 19:47:58 - BeanFactory id=83626b47-9831-368c-a44c-395a74af597f
+2026-06-19 19:47:59 - Tomcat initialized with port 9000 (http)
+2026-06-19 19:47:59 - Starting service [Tomcat]
+2026-06-19 19:47:59 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-19 19:47:59 - Root WebApplicationContext: initialization completed in 2204 ms
+2026-06-19 19:47:59 - HikariPool-1 - Starting...
+2026-06-19 19:47:59 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@d70dbeb
+2026-06-19 19:47:59 - HikariPool-1 - Start completed.
+2026-06-19 19:48:00 - Database: jdbc:mysql://localhost:3306/login (MySQL 8.4)
+2026-06-19 19:48:00 - Using MySQL 8.4 which is newer than the version Flyway has been verified with. The latest verified version of MySQL is 8.1.
+2026-06-19 19:48:00 - Schema history table `login`.`flyway_schema_history` does not exist yet
+2026-06-19 19:48:00 - Successfully validated 2 migrations (execution time 00:00.028s)
+2026-06-19 19:48:00 - Creating Schema History table `login`.`flyway_schema_history` ...
+2026-06-19 19:48:00 - Current version of schema `login`: << Empty Schema >>
+2026-06-19 19:48:00 - Migrating schema `login` to version "1 - create users table"
+2026-06-19 19:48:00 - Migrating schema `login` to version "2 - insert users"
+2026-06-19 19:48:00 - Successfully applied 2 migrations to schema `login`, now at version v2 (execution time 00:00.068s)
+2026-06-19 19:48:00 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-19 19:48:00 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-06-19 19:48:00 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 19:48:00 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 19:48:00 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/login]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.4.3
+	Default catalog/schema: login/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-19 19:48:01 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 19:48:01 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 19:48:01 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 19:48:01 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 19:48:02 - Eureka HTTP Client uses RestClient.
+2026-06-19 19:48:02 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-19 19:48:02 - Exposing 1 endpoint beneath base path '/actuator'
+2026-06-19 19:48:02 - Setting initial instance status as: STARTING
+2026-06-19 19:48:02 - Initializing Eureka in region us-east-1
+2026-06-19 19:48:02 - Resolving eureka endpoints via configuration
+2026-06-19 19:48:02 - Disable delta property : false
+2026-06-19 19:48:02 - Single vip registry refresh property : null
+2026-06-19 19:48:02 - Force full registry fetch : false
+2026-06-19 19:48:02 - Application is null : false
+2026-06-19 19:48:02 - Registered Applications size is zero : true
+2026-06-19 19:48:02 - Application version is -1: true
+2026-06-19 19:48:02 - Getting all instance registry info from the eureka server
+2026-06-19 19:48:03 - The response status is 200
+2026-06-19 19:48:03 - Starting heartbeat executor: renew interval is: 30
+2026-06-19 19:48:03 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-19 19:48:03 - Discovery Client initialized at timestamp 1781912883231 with initial instances count: 0
+2026-06-19 19:48:03 - Registering application LOGIN with eureka with status UP
+2026-06-19 19:48:03 - Saw local status change event StatusChangeEvent [timestamp=1781912883237, current=UP, previous=STARTING]
+2026-06-19 19:48:03 - DiscoveryClient_LOGIN/DESKTOP-9D8JIJM:login:9000: registering service...
+2026-06-19 19:48:03 - Tomcat started on port 9000 (http) with context path '/'
+2026-06-19 19:48:03 - Updating port to 9000
+2026-06-19 19:48:03 - Started LoginApplication in 6.894 seconds (process running for 7.696)
+2026-06-19 19:48:03 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-06-19 19:48:03 - SpringDoc /swagger-ui/index.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-06-19 19:48:03 - DiscoveryClient_LOGIN/DESKTOP-9D8JIJM:login:9000 - registration status: 204
+2026-06-19 19:48:05 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19 19:48:05 - Initializing Servlet 'dispatcherServlet'
+2026-06-19 19:48:05 - Completed initialization in 1 ms
+2026-06-19 19:48:33 - Disable delta property : false
+2026-06-19 19:48:33 - Single vip registry refresh property : null
+2026-06-19 19:48:33 - Force full registry fetch : false
+2026-06-19 19:48:33 - Application is null : false
+2026-06-19 19:48:33 - Registered Applications size is zero : true
+2026-06-19 19:48:33 - Application version is -1: false
+2026-06-19 19:48:33 - Getting all instance registry info from the eureka server
+2026-06-19 19:48:33 - The response status is 200
+2026-06-19 19:53:02 - Resolving eureka endpoints via configuration
+2026-06-19 19:54:28 - Error al registrar usuario: El usuario con este user: nombre_usuario ya existe actualmente
+2026-06-19 19:58:02 - Resolving eureka endpoints via configuration
+2026-06-19 20:03:02 - Resolving eureka endpoints via configuration
+2026-06-19 20:08:02 - Resolving eureka endpoints via configuration
+2026-06-19 20:13:02 - Resolving eureka endpoints via configuration
