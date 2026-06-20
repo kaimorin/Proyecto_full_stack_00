@@ -14,7 +14,7 @@ import com.proyecto.notificaciones.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("/api/notificaciones")
+@RequestMapping("/api/v1/notificaciones")
 public class NotificacionController {
 
     private final NotificacionService service;
