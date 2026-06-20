@@ -11,6 +11,7 @@ import lombok.*;
 @Entity
 @Table(name = "notas")
 @Getter @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Notas {

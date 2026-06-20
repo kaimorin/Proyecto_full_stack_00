@@ -1,68 +1,74 @@
 package com.proyecto.notas.service;
 
-import com.proyecto.notas.model.Notas;
 import com.proyecto.notas.dto.NotasDto;
+import com.proyecto.notas.model.Notas;
 import com.proyecto.notas.repository.NotasRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor 
 public class NotasService {
 
-    @Autowired
-    private NotasRepository notasRepository;
+    private final NotasRepository notasRepository;
 
-    /**
-     * Devuelve todas las notas almacenadas en la base de datos.
-     */
-    public List<Notas> listarTodas() {
-        return notasRepository.findAll();
+    public List<NotasDto> listarTodas() {
+        
+        return notasRepository.findAll().stream()
+                .map(this::entityToDto)
+                .toList();
     }
 
-    /**
-     * Busca una nota por su identificador.
-     *
-     * @param id El ID de la nota buscada.
-     * @return Optional con la nota si existe, o vacío si no existe.
-     */
-    public Optional<Notas> buscarPorId(Long id) {
-        return notasRepository.findById(id);
+    public Optional<NotasDto> buscarPorId(Long id) {
+        // Busca en la base de datos y mapea el resultado a DTO si existe
+        return notasRepository.findById(id).map(this::entityToDto);
     }
 
-    /**
-     * Guarda o actualiza una entidad de nota directamente.
-     *
-     * @param nota Entidad de nota a persistir.
-     * @return La nota persistida con el ID generado.
-     */
-    public Notas guardar(Notas nota) {
-        return notasRepository.save(nota);
-    }
-
-    /**
-     * Crea una nueva nota a partir de un DTO y la persiste en la base de datos.
-     *
-     * @param dto Datos de la nota recibidos desde el controlador.
-     * @return La nota creada y persistida.
-     */
-    public Notas crearNota(NotasDto dto) {
-        Notas nota = new Notas();
-        nota.setEstudiante(dto.getEstudiante());
-        nota.setAsignatura(dto.getAsignatura());
-        nota.setValor(dto.getValor());
+    public NotasDto crearNota(NotasDto dto) {
+        // Convierte el DTO de entrada a Entidad para guardarlo en la BD
+        Notas nota = dtoToEntity(dto);
         
         // Aquí es donde en el futuro llamaremos al microservicio de notificaciones justo antes del return
-        return notasRepository.save(nota);
+        return entityToDto(notasRepository.save(nota));
     }
 
-    /**
-     * Elimina una nota por su identificador.
-     *
-     * @param id El ID de la nota a eliminar.
-     */
+    public NotasDto actualizar(Long id, NotasDto data) {
+        
+        return notasRepository.findById(id).map(nota -> {
+            nota.setEstudiante(data.getEstudiante());
+            nota.setAsignatura(data.getAsignatura());
+            nota.setValor(data.getValor());
+            return entityToDto(notasRepository.save(nota));
+        }).orElseThrow(() -> new RuntimeException("No se encontró la nota"));
+    }
+
     public void eliminar(Long id) {
+        
+        notasRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No se encontró la nota"));
+
         notasRepository.deleteById(id);
+    }
+
+
+    private Notas dtoToEntity(NotasDto dto) {
+        return Notas.builder()
+                .id(dto.getId())
+                .estudiante(dto.getEstudiante())
+                .asignatura(dto.getAsignatura())
+                .valor(dto.getValor())
+                .build();
+    }
+
+    private NotasDto entityToDto(Notas entity) {
+        return NotasDto.builder()
+                .id(entity.getId())
+                .estudiante(entity.getEstudiante())
+                .asignatura(entity.getAsignatura())
+                .valor(entity.getValor())
+                .build();
     }
 }

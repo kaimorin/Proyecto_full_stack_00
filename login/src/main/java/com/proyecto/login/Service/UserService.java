@@ -1,4 +1,4 @@
-package com.proyecto.login.service;
+package com.proyecto.login.Service;
 import com.proyecto.login.dto.RoleDTO;
 import com.proyecto.login.dto.UserDTO;
 import com.proyecto.login.model.Rol;
