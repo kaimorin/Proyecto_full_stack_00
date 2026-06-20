@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import com.proyecto.hojadevida.dto.HojaDeVidaDTO;
 import com.proyecto.hojadevida.model.HojaDeVida;
 import com.proyecto.hojadevida.repository.HojaDeVidaRepository;
-import static org.assertj.core.api.Assertions.assertThat;
+
 class HojaDeVidaServiceTest {
 
     @Test
@@ -25,8 +25,7 @@ class HojaDeVidaServiceTest {
                 "María Pérez",
                 "4to Básico"
         );
-         HojaDeVida hojaDeVidatest = new HojaDeVida(2L, "Ana Gómez", java.sql.Date.valueOf("2001-02-02"), 87654321, "Avenida Siempre Viva 456", 87654321, "Carlos Gómez", "5to Básico");
-        Mockito.when(hojaDeVidaRepository.findAll()).thenReturn(java.util.Arrays.asList(hojaDeVidatest));
+        Mockito.when(hojaDeVidaRepository.findAll()).thenReturn(java.util.Arrays.asList(hojaDeVida));
         List<HojaDeVidaDTO> result = hojaDeVidaService.getAllHojaDeVidasDTO();
         assertThat(result).hasSize(1); 
         assertThat(result.get(0).getNombreCompleto()).isEqualTo("Juan Pérez");
