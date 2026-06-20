@@ -1,5 +1,6 @@
 package com.proyecto.login.controller;
 import com.proyecto.login.service.UserService;
+import com.proyecto.login.security.JwtUtil;
 import com.proyecto.login.dto.ApiResponse;
 import com.proyecto.login.dto.RoleDTO;
 import com.proyecto.login.dto.UserCreateDTO;
@@ -25,8 +26,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final JwtUtil jwtUtil;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    
+
+    // * Método Registrar Usuario Nuevo * //
+
     @PostMapping("/register")
     @Operation(summary = "Registrar un nuevo usuario", description = "Crea un nuevo usuario con un rol específico")
     public ResponseEntity<ApiResponse<UserDTO>> register(@Valid @RequestBody UserCreateDTO dto) {
@@ -48,7 +52,8 @@ public class UserController {
         }
     }
 
-   
+    // * Método Iniciar Sesión * //
+
     @PostMapping("/login")
     @Operation(summary = "Iniciar sesión", description = "Valida las credenciales del usuario y permite el acceso")
     public ResponseEntity<ApiResponse<String>> login(@Valid @RequestBody UserCredentialsDTO dto) {
@@ -65,9 +70,21 @@ public class UserController {
         }
     }
 
+    // * Método Listar Usuarios Existentes * //
+
     @GetMapping("/list")
+
     @Operation(summary = "Listar usuarios", description = "Obtiene una lista de todos los usuarios registrados")
-    public ResponseEntity<ApiResponse<List<UserDTO>>> getAllUsers() {
+    public ResponseEntity<ApiResponse<List<UserDTO>>> getAllUsers(@RequestHeader("Authorization") String authHeader) {
+
+        String token = authHeader.replace("Bearer ", "");
+
+        if (!jwtUtil.validateToken(token)) {
+            ApiResponse<List<UserDTO>> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
+
         List<UserDTO> users = userService.getAllUsersDTO();
         ApiResponse<List<UserDTO>> response =
                 new ApiResponse<>(200, "Listado de usuarios", users);
