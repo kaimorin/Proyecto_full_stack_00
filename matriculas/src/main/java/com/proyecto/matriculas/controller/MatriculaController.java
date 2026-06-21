@@ -24,7 +24,6 @@ public class MatriculaController {
     // * Método Listar Matrículas Existentes * //
 
     @GetMapping("/list")
-
     @Operation(summary = "Obtener todas las matrículas")
     public ResponseEntity<ApiResponse<List<MatriculaDTO>>> getAllMatriculas(@RequestHeader("Authorization") String authHeader) {
 

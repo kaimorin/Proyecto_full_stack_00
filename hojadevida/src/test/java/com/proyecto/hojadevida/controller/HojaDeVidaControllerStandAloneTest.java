@@ -20,7 +20,7 @@ class HojaDeVidaControllerStandAloneTest {
         hojaDeVidaService = org.mockito.Mockito.mock(HojaDeVidaService.class); // crea un mock de HojaDeVidaService para simular su comportamiento durante las pruebas sin necesidad de una implementación real
         authService = org.mockito.Mockito.mock(AuthService.class); // crea un mock de AuthService para simular la validación de tokens durante las pruebas sin necesidad de una implementación real
 
-        HojaDeVidaController hojaDeVidaController = new HojaDeVidaController(hojaDeVidaService); // crea una instancia de HojaDeVidaController pasando los mocks de HojaDeVidaService y AuthService como dependencias
+        HojaDeVidaController hojaDeVidaController = new HojaDeVidaController(hojaDeVidaService, authService); // crea una instancia de HojaDeVidaController pasando los mocks de HojaDeVidaService y AuthService como dependencias
         mockMvc = MockMvcBuilders.standaloneSetup(hojaDeVidaController).build(); // configura MockMvc para usar la instancia de HojaDeVidaController creada, lo que permite simular solicitudes HTTP a los endpoints del controlador durante las pruebas
     }
 

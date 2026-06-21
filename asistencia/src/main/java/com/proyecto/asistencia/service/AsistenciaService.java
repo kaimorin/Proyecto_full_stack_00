@@ -28,7 +28,7 @@ public class AsistenciaService {
 
     // Obtener registro de asistencia por ID
     public AsistenciaDTO getAsistenciaById(Long id) {
-    Asistencia a = asistenciaRepository.findById(id)
+        Asistencia a = asistenciaRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Asistencia no encontrada con id: " + id));
         return new AsistenciaDTO(a.getFecha(), a.getEstadoAsistencia(), a.getRutAlumno());
     }
@@ -42,7 +42,7 @@ public class AsistenciaService {
 
     // Actualizar registro de asistencia
     public AsistenciaDTO updateAsistencia(Long id, AsistenciaDTO dto) {
-    Asistencia a = asistenciaRepository.findById(id)
+        Asistencia a = asistenciaRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Asistencia no encontrada con id: " + id));
         a.setFecha(dto.getFecha());
         a.setEstadoAsistencia(dto.getEstadoAsistencia());

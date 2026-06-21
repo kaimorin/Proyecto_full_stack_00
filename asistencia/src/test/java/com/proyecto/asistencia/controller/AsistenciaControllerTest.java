@@ -21,7 +21,7 @@ class AsistenciaControllerTest {
     void setUp() {
         asistenciaService = org.mockito.Mockito.mock(AsistenciaService.class);
         authService = org.mockito.Mockito.mock(AuthService.class);
-        AsistenciaController asistenciaController = new AsistenciaController(asistenciaService);
+        AsistenciaController asistenciaController = new AsistenciaController(asistenciaService,authService);
         mockMvc = MockMvcBuilders.standaloneSetup(asistenciaController).build();
     }
     @Test 
