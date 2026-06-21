@@ -1,70 +1,142 @@
 package com.proyecto.notificaciones.controller;
 
-import com.proyecto.notificaciones.dto.NotificacionDto;
-import com.proyecto.notificaciones.service.NotificacionService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.proyecto.notificaciones.model.Notificacion;
+import com.proyecto.notificaciones.dto.NotificacionDto;
+import com.proyecto.notificaciones.service.NotificacionService;
+import com.proyecto.notificaciones.service.AuthService;
+
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("/api/notificaciones")
-@RequiredArgsConstructor
-@Tag(name = "Notificaciones", description = "Controlador para la gestión de notificaciones del sistema")
+@RequestMapping("/api/v1/notificaciones")
 public class NotificacionController {
 
     private final NotificacionService service;
+    private final AuthService authService;
+
+    public NotificacionController(NotificacionService service, AuthService authService) {
+        this.service = service;
+        this.authService = authService;
+    }
+
+    // * Método Listar Notificaciones Existentes * //
 
     @GetMapping
-    @Operation(summary = "Listar todas las notificaciones", description = "Permite obtener un listado completo de todas las notificaciones registradas")
-    public ResponseEntity<List<NotificacionDto>> listarTodos() {
-        return ResponseEntity.ok(service.listarTodos());
+
+    @Operation(summary = "Listar todas las notificaciones", description = "Obtiene la lista completa de notificaciones")
+    public ResponseEntity<com.proyecto.notificaciones.dto.ApiResponse<List<Notificacion>>> listar(@RequestHeader("Authorization") String authHeader) {
+
+        String token = authHeader.replace("Bearer ", "");
+        com.proyecto.notificaciones.dto.ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            com.proyecto.notificaciones.dto.ApiResponse<List<Notificacion>> errorResponse =
+                    new com.proyecto.notificaciones.dto.ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
+
+        List<Notificacion> lista = service.listar();
+        com.proyecto.notificaciones.dto.ApiResponse<List<Notificacion>> response =
+                new com.proyecto.notificaciones.dto.ApiResponse<>(200, "Listado de notificaciones", lista);
+        return ResponseEntity.ok(response);
     }
+
+    // * Método Obtener Notificación por ID * //
 
     @GetMapping("/{id}")
-    @Operation(summary = "Obtener notificación por ID", description = "Permite buscar una notificación específica mediante su identificador único")
-    public ResponseEntity<NotificacionDto> obtenerPorId(@PathVariable Long id) {
-        return service.obtenerPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @Operation(summary = "Obtener notificación por ID", description = "Obtiene una notificación específica")
+
+    public ResponseEntity<com.proyecto.notificaciones.dto.ApiResponse<Notificacion>> obtener(@RequestHeader("Authorization") String authHeader, @PathVariable Long id) {
+        String token = authHeader.replace("Bearer ", "");
+        com.proyecto.notificaciones.dto.ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            com.proyecto.notificaciones.dto.ApiResponse<Notificacion> errorResponse =
+                new com.proyecto.notificaciones.dto.ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
+
+        return service.buscarPorId(id)
+                .map(notif -> ResponseEntity.ok(
+                    new com.proyecto.notificaciones.dto.ApiResponse<>(200, "Notificación encontrada", notif)))
+                .orElse(ResponseEntity.status(404).body(
+                    new com.proyecto.notificaciones.dto.ApiResponse<>(404, "Notificación no encontrada", null)));
     }
 
-    @GetMapping("/origen/{origen}")
-    @Operation(summary = "Obtener notificación por origen", description = "Permite buscar notificaciones filtrándolas por el nombre del sistema u origen que las generó")
-    public ResponseEntity<NotificacionDto> obtenerPorOrigen(@PathVariable String origen) {
-        return service.obtenerPorOrigen(origen)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+    // * Método Crear Notificación Nueva * //
 
     @PostMapping
-    @Operation(summary = "Crear nueva notificación", description = "Permite registrar una nueva notificación dentro del sistema")
-    public ResponseEntity<NotificacionDto> crear(@RequestBody NotificacionDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto));
+    @Operation(summary = "Crear notificación", description = "Registra una nueva notificación")
+
+    public ResponseEntity<com.proyecto.notificaciones.dto.ApiResponse<Notificacion>> crear(@RequestHeader("Authorization") String authHeader, @Valid @RequestBody NotificacionDto dto){
+        String token = authHeader.replace("Bearer ", "");
+        com.proyecto.notificaciones.dto.ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            com.proyecto.notificaciones.dto.ApiResponse<Notificacion> errorResponse =
+                new com.proyecto.notificaciones.dto.ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
+
+        Notificacion nueva = service.crear(dto);
+        com.proyecto.notificaciones.dto.ApiResponse<Notificacion> response =
+            new com.proyecto.notificaciones.dto.ApiResponse<>(201, "Notificación creada", nueva);
+        return ResponseEntity.status(201).body(response);
+
     }
 
-    @PutMapping("/{id}")
-    @Operation(summary = "Actualizar notificación", description = "Permite modificar los datos de una notificación existente utilizando su ID")
-    public ResponseEntity<NotificacionDto> actualizar(@PathVariable Long id, @RequestBody NotificacionDto dto) {
-        try {
-            return ResponseEntity.ok(service.actualizar(id, dto));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+    // * Método Marcar Notificación como Leída * //
+
+    @PatchMapping("/{id}/leer")
+    @Operation(summary = "Marcar como leída", description = "Marca una notificación como leída")
+
+    public ResponseEntity<com.proyecto.notificaciones.dto.ApiResponse<Void>> marcarComoLeida(@RequestHeader("Authorization") String authHeader, @PathVariable Long id){
+
+        String token = authHeader.replace("Bearer ", "");
+        com.proyecto.notificaciones.dto.ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            com.proyecto.notificaciones.dto.ApiResponse<Void> errorResponse =
+                new com.proyecto.notificaciones.dto.ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
         }
+
+        if (service.buscarPorId(id).isPresent()) {
+            service.marcarComoLeida(id);
+            return ResponseEntity.ok(
+                new com.proyecto.notificaciones.dto.ApiResponse<>(200, "Notificación marcada como leída", null));
+        }
+        return ResponseEntity.status(404).body(
+            new com.proyecto.notificaciones.dto.ApiResponse<>(404, "Notificación no encontrada", null));
     }
+
+    // * Método Eliminar Notificación * //
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Eliminar notificación", description = "Permite borrar permanentemente una notificación del sistema mediante su ID")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        try {
-            service.eliminar(id);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+    @Operation(summary = "Eliminar notificación", description = "Elimina una notificación por ID")
+
+    public ResponseEntity<com.proyecto.notificaciones.dto.ApiResponse<Void>> eliminar(@PathVariable Long id, @RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+        com.proyecto.notificaciones.dto.ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            com.proyecto.notificaciones.dto.ApiResponse<Void> errorResponse =
+                new com.proyecto.notificaciones.dto.ApiResponse<>(401, "Token inválido", null);
+            return ResponseEntity.status(401).body(errorResponse);
         }
+
+        if (service.buscarPorId(id).isPresent()) {
+            service.eliminar(id);
+            return ResponseEntity.ok(
+                new com.proyecto.notificaciones.dto.ApiResponse<>(200, "Notificación eliminada", null));
+        }
+        return ResponseEntity.status(404).body(
+            new com.proyecto.notificaciones.dto.ApiResponse<>(404, "Notificación no encontrada", null));
     }
 }
