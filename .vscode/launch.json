@@ -99,6 +99,16 @@
             "projectName": "com.proyecto-leccionario",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-NotificacionesApplication<com.proyecto-notificaciones>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.proyecto.notificaciones.NotificacionesApplication",
+            "projectName": "com.proyecto-notificaciones",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

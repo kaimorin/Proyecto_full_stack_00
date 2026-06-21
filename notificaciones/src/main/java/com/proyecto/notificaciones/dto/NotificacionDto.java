@@ -1,23 +1,24 @@
 package com.proyecto.notificaciones.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import java.time.LocalDateTime;
 
-/**
- * DTO para recibir los datos de una notificación en las solicitudes HTTP.
- *
- * Incluye solo los campos necesarios para crear una notificación.
- */
-@Data
+@Getter @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class NotificacionDto {
+
+    private Long id;
 
     @NotBlank(message = "El mensaje es obligatorio")
     private String mensaje;
 
     @NotBlank(message = "El origen es obligatorio")
     private String origen;
+
+    private LocalDateTime fechaCreacion;
+
+    private boolean leida;
 }
