@@ -1,114 +1,139 @@
 package com.proyecto.notas.controller;
-import com.proyecto.notas.dto.ApiResponse;
-import com.proyecto.notas.dto.NotasDto;
-import com.proyecto.notas.service.NotasService;
-import com.proyecto.notas.service.AuthService;
-import io.swagger.v3.oas.annotations.Operation;
+
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import com.proyecto.notas.model.Notas;
+import com.proyecto.notas.dto.NotasDto;
+import com.proyecto.notas.dto.ApiResponse;
+import com.proyecto.notas.service.NotasService;
+import com.proyecto.notas.service.AuthService;
+
+import io.swagger.v3.oas.annotations.Operation;
+
 import java.util.List;
-import java.util.Map;
 
 @RestController
-@RequestMapping("/v1/api/notas")
-@RequiredArgsConstructor
+@RequestMapping("/api/v1/notas")
 public class NotasController {
 
-    private final NotasService service;
+    private final NotasService notasService;
     private final AuthService authService;
 
-    @GetMapping("/list")
-    @Operation(summary = "Listado de notas", description = "Permite listar todas las notas existentes (Requiere Token JWT)")
-    public ResponseEntity<ApiResponse<List<NotasDto>>> listar(@RequestHeader("Authorization") String authHeader) {
-        
+    public NotasController(NotasService notasService, AuthService authService) {
+        this.notasService = notasService;
+        this.authService = authService;
+    }
+
+    // * Método Listar Notas Existentes * //
+
+    @GetMapping
+
+    @Operation(summary = "Listar todas las notas", description = "Obtiene la lista completa de todas las notas registradas")
+    public ResponseEntity<ApiResponse<List<Notas>>> listar(@RequestHeader("Authorization") String authHeader) {
+
         String token = authHeader.replace("Bearer ", "");
         ApiResponse<String> validationResponse = authService.validateToken(token);
 
         if (validationResponse == null || validationResponse.getCode() != 200) {
-            ApiResponse<List<NotasDto>> errorResponse = 
-                    new ApiResponse<>(401, "Token inválido o expirado", null);
+            ApiResponse<List<Notas>> errorResponse =
+                    new ApiResponse<>(401, "Token inválido o no proporcionado", null);
             return ResponseEntity.status(401).body(errorResponse);
         }
 
-        try {
-            List<NotasDto> lista = service.listarTodas();
-            ApiResponse<List<NotasDto>> response = new ApiResponse<>(200, "Listado de notas obtenido con éxito", lista);
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            ApiResponse<List<NotasDto>> response = new ApiResponse<>(500, "Error al listar las notas: " + e.getMessage(), null);
-            return ResponseEntity.status(500).body(response);
-        }
+        List<Notas> lista = notasService.listarTodas();
+        ApiResponse<List<Notas>> response =
+                new ApiResponse<>(200, "Lista de notas obtenida con éxito", lista);
+        return ResponseEntity.ok(response);
     }
+
+    // * Método Obtener Nota por ID * //
 
     @GetMapping("/{id}")
-    @Operation(summary = "Buscar nota por ID", description = "Permite buscar una nota específica mediante su identificador único")
-    public ResponseEntity<ApiResponse<NotasDto>> obtener(@PathVariable Long id) {
-        try {
-            return service.buscarPorId(id)
-                    .map(nota -> ResponseEntity.ok(new ApiResponse<>(200, "Nota encontrada", nota)))
-                    .orElse(ResponseEntity.status(404).body(new ApiResponse<>(404, "Nota no encontrada", null)));
-        } catch (Exception e) {
-            ApiResponse<NotasDto> response = new ApiResponse<>(500, "Error al obtener la nota: " + e.getMessage(), null);
-            return ResponseEntity.status(500).body(response);
+    @Operation(summary = "Obtener nota por ID", description = "Obtiene una nota específica por su identificador")
+
+    public ResponseEntity<ApiResponse<Notas>> obtener(@RequestHeader("Authorization") String authHeader, @PathVariable Long id) {
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            ApiResponse<Notas> errorResponse =
+                new ApiResponse<>(401, "Token inválido o no proporcionado", null);
+            return ResponseEntity.status(401).body(errorResponse);
         }
+
+        return notasService.buscarPorId(id)
+                .map(nota -> ResponseEntity.ok(new ApiResponse<>(200, "Nota encontrada", nota)))
+                .orElse(ResponseEntity.status(404).body(new ApiResponse<>(404, "Nota no encontrada", null)));
     }
 
-    @PostMapping("/crear")
-    @Operation(summary = "Registrar nueva nota", description = "Permite ingresar una nueva nota al sistema")
-    public ResponseEntity<ApiResponse<NotasDto>> crear(@Valid @RequestBody NotasDto notasDto) {
-        try {
-            NotasDto creado = service.crearNota(notasDto);
-            ApiResponse<NotasDto> response = new ApiResponse<>(201, "Nota registrada exitosamente", creado);
-            return ResponseEntity.status(201).body(response);
-        } catch (Exception e) {
-            ApiResponse<NotasDto> response = new ApiResponse<>(400, "Error al registrar la nota: " + e.getMessage(), null);
-            return ResponseEntity.badRequest().body(response);
+    // * Método Crear Nota Nueva * //
+
+    @PostMapping
+    @Operation(summary = "Crear nueva nota", description = "Registra una nueva nota para un estudiante")
+
+    public ResponseEntity<ApiResponse<Notas>> crear(@RequestHeader("Authorization") String authHeader, @Valid @RequestBody NotasDto notasDto){
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            ApiResponse<Notas> errorResponse =
+                new ApiResponse<>(401, "Token inválido o no proporcionado", null);
+            return ResponseEntity.status(401).body(errorResponse);
         }
+
+        Notas nuevaNota = notasService.crearNota(notasDto);
+        ApiResponse<Notas> response =
+            new ApiResponse<>(201, "Nota registrada exitosamente", nuevaNota);
+        return ResponseEntity.status(201).body(response);
+
     }
+
+    // * Método Actualizar Nota * //
 
     @PutMapping("/{id}")
-    @Operation(summary = "Actualizar nota", description = "Permite modificar los datos de una nota existente")
-    public ResponseEntity<ApiResponse<NotasDto>> actualizar(@PathVariable Long id, @Valid @RequestBody NotasDto notasDto) {
-        try {
-            NotasDto actualizado = service.actualizar(id, notasDto);
-            return ResponseEntity.ok(new ApiResponse<>(200, "Nota actualizada correctamente", actualizado));
-        } catch (Exception e) {
-            if (e.getMessage() != null && e.getMessage().contains("No se encontró la nota")) {
-                return ResponseEntity.status(404).body(new ApiResponse<>(404, "Nota no encontrada para actualizar", null));
-            }
-            ApiResponse<NotasDto> response = new ApiResponse<>(500, "Error al actualizar la nota: " + e.getMessage(), null);
-            return ResponseEntity.status(500).body(response);
+    @Operation(summary = "Actualizar nota", description = "Actualiza los datos de una nota existente")
+
+    public ResponseEntity<ApiResponse<Notas>> actualizar(@RequestHeader("Authorization") String authHeader, @Valid @RequestBody NotasDto notasDto, @PathVariable Long id){
+
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            ApiResponse<Notas> errorResponse =
+                new ApiResponse<>(401, "Token inválido o no proporcionado", null);
+            return ResponseEntity.status(401).body(errorResponse);
         }
+
+        return notasService.buscarPorId(id).map(notaExistente -> {
+            notaExistente.setEstudiante(notasDto.getEstudiante());
+            notaExistente.setAsignatura(notasDto.getAsignatura());
+            notaExistente.setValor(notasDto.getValor());
+            Notas actualizado = notasService.guardar(notaExistente);
+            return ResponseEntity.ok(new ApiResponse<>(200, "Nota actualizada correctamente", actualizado));
+        }).orElse(ResponseEntity.status(404).body(new ApiResponse<>(404, "Nota no encontrada", null)));
     }
+
+    // * Método Eliminar Nota * //
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Eliminar nota por ID", description = "Permite remover una nota del sistema usando su ID")
-    public ResponseEntity<ApiResponse<Void>> eliminar(@PathVariable Long id) {
-        try {
-            if (service.buscarPorId(id).isPresent()) {
-                service.eliminar(id);
-                ApiResponse<Void> response = new ApiResponse<>(200, "Nota eliminada correctamente", null);
-                return ResponseEntity.ok(response);
-            } else {
-                return ResponseEntity.status(404).body(new ApiResponse<>(404, "Nota no encontrada para eliminar", null));
-            }
-        } catch (Exception e) {
-            ApiResponse<Void> response = new ApiResponse<>(500, "Error al eliminar la nota: " + e.getMessage(), null);
-            return ResponseEntity.status(500).body(response);
-        }
-    }
+    @Operation(summary = "Eliminar nota", description = "Elimina una nota por su ID")
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse<Map<String, String>>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-                errors.put(error.getField(), error.getDefaultMessage()));
-        ApiResponse<Map<String, String>> response = new ApiResponse<>(400, "Error de validación en los datos de la nota", errors);
-        return ResponseEntity.badRequest().body(response);
+    public ResponseEntity<ApiResponse<Void>> eliminar(@PathVariable Long id, @RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+        ApiResponse<String> validationResponse = authService.validateToken(token);
+
+        if (validationResponse == null || validationResponse.getCode() != 200) {
+            ApiResponse<Void> errorResponse =
+                new ApiResponse<>(401, "Token inválido o no proporcionado", null);
+            return ResponseEntity.status(401).body(errorResponse);
+        }
+
+        if (notasService.buscarPorId(id).isPresent()) {
+            notasService.eliminar(id);
+            return ResponseEntity.ok(new ApiResponse<>(200, "Nota eliminada correctamente", null));
+        }
+        return ResponseEntity.status(404).body(new ApiResponse<>(404, "Nota no encontrada", null));
     }
 }
