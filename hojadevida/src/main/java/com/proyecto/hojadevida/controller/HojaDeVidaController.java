@@ -23,7 +23,7 @@ public class HojaDeVidaController {
 
     private final HojaDeVidaService hojaDeVidaService;
     private final AuthService authService;
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(HojaDeVidaController.class);
 
     // * Método Listar Hojas de Vida Existentes * //
 
