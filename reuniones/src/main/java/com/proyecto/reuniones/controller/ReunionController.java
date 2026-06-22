@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/reuniones")
@@ -20,6 +23,7 @@ public class ReunionController {
 
     private final ReunionService reunionService;
     private final AuthService authService;
+    private static final Logger logger = LoggerFactory.getLogger(ReunionController.class);
 
     // * Método Listar Reuniones Existentes * //
 
@@ -42,6 +46,7 @@ public class ReunionController {
                     new ApiResponse<>(200, "Listado de reuniones", reuniones);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
+            logger.error("Error al listar reuniones: {}", e.getMessage());
             ApiResponse<List<ReunionDTO>> response = new ApiResponse<>(500, "Error al listar reuniones: " + e.getMessage(), null);
             return ResponseEntity.status(500).body(response);
         }
