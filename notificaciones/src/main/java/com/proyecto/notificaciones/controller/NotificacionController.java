@@ -33,7 +33,7 @@ public class NotificacionController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/origen/{origen}")
+    @GetMapping("/origen")
     @Operation(summary = "Obtener notificación por origen", description = "Permite buscar notificaciones filtrándolas por el nombre del sistema u origen que las generó")
     public ResponseEntity<NotificacionDto> obtenerPorOrigen(@PathVariable String origen) {
         return service.obtenerPorOrigen(origen)
