@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequestMapping("/v1/api/notas")
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ public class NotasController {
 
     private final NotasService service;
     private final AuthService authService;
+    private static final Logger logger = LoggerFactory.getLogger(NotasController.class);
 
     @GetMapping("/list")
     @Operation(summary = "Listado de notas", description = "Permite listar todas las notas existentes (Requiere Token JWT)")
@@ -40,6 +44,7 @@ public class NotasController {
             ApiResponse<List<NotasDto>> response = new ApiResponse<>(200, "Listado de notas obtenido con éxito", lista);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
+            logger.error("Error al listar las notas: {}", e.getMessage());
             ApiResponse<List<NotasDto>> response = new ApiResponse<>(500, "Error al listar las notas: " + e.getMessage(), null);
             return ResponseEntity.status(500).body(response);
         }

@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/asistencia")
@@ -20,6 +23,7 @@ public class AsistenciaController {
 
     private final AsistenciaService asistenciaService;
     private final AuthService authService;
+    private static final Logger logger = LoggerFactory.getLogger(AsistenciaController.class);
 
     // * Método Listar Asistencias Existentes * //
 
@@ -42,6 +46,7 @@ public class AsistenciaController {
                     new ApiResponse<>(200, "Listado de asistencias", asistencias);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
+            logger.error("Error al listar asistencias: {}", e.getMessage());
             ApiResponse<List<AsistenciaDTO>> response = new ApiResponse<>(500, "Error al listar asistencias: " + e.getMessage(), null);
             return ResponseEntity.status(500).body(response);
         }

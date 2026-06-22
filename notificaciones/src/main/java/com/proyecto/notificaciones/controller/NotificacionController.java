@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequestMapping("/api/notificaciones")
 @RequiredArgsConstructor
@@ -18,6 +21,7 @@ import java.util.List;
 public class NotificacionController {
 
     private final NotificacionService service;
+    private static final Logger logger = LoggerFactory.getLogger(NotificacionController.class);
 
     @GetMapping
     @Operation(summary = "Listar todas las notificaciones", description = "Permite obtener un listado completo de todas las notificaciones registradas")
@@ -25,6 +29,7 @@ public class NotificacionController {
         try {
             return ResponseEntity.ok(service.listarTodos());
         } catch (Exception e) {
+            logger.error("Error al listar notificaciones: {}", e.getMessage());
             return ResponseEntity.status(500).build();
         }
     }

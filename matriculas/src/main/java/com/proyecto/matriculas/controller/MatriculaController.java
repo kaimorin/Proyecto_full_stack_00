@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/matriculas")
@@ -20,6 +23,7 @@ public class MatriculaController {
 
     private final MatriculaService matriculaService;
     private final AuthService authService;
+    private static final Logger logger = LoggerFactory.getLogger(MatriculaController.class);
 
     // * Método Listar Matrículas Existentes * //
 
@@ -41,6 +45,7 @@ public class MatriculaController {
                     new ApiResponse<>(200, "Listado de matrículas", matriculas);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
+            logger.error("Error al listar matrículas: {}", e.getMessage());
             ApiResponse<List<MatriculaDTO>> response = new ApiResponse<>(500, "Error al listar matrículas: " + e.getMessage(), null);
             return ResponseEntity.status(500).body(response);
         }
