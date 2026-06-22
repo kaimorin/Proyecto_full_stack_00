@@ -27,20 +27,24 @@ public class ReunionController {
 
     @Operation(summary = "Obtener todas las reuniones", description = "Permite listar todas las reuniones existentes")
     public ResponseEntity<ApiResponse<List<ReunionDTO>>> listar(@RequestHeader("Authorization") String authHeader) {
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            ApiResponse<String> validationResponse = authService.validateToken(token);
 
-        String token = authHeader.replace("Bearer ", "");
-        ApiResponse<String> validationResponse = authService.validateToken(token);
+            if (validationResponse == null || validationResponse.getCode() != 200) {
+                ApiResponse<List<ReunionDTO>> errorResponse =
+                        new ApiResponse<>(401, "Token inválido", null);
+                return ResponseEntity.status(401).body(errorResponse);
+            }
 
-        if (validationResponse == null || validationResponse.getCode() != 200) {
-            ApiResponse<List<ReunionDTO>> errorResponse =
-                    new ApiResponse<>(401, "Token inválido", null);
-            return ResponseEntity.status(401).body(errorResponse);
+            List<ReunionDTO> reuniones = reunionService.getAllReunionesDTO();
+            ApiResponse<List<ReunionDTO>> response =
+                    new ApiResponse<>(200, "Listado de reuniones", reuniones);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ApiResponse<List<ReunionDTO>> response = new ApiResponse<>(500, "Error al listar reuniones: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
         }
-
-        List<ReunionDTO> reuniones = reunionService.getAllReunionesDTO();
-        ApiResponse<List<ReunionDTO>> response =
-                new ApiResponse<>(200, "Listado de reuniones", reuniones);
-        return ResponseEntity.ok(response);
     }
 
     // * Método Obtener Reunión por ID * //
@@ -49,19 +53,24 @@ public class ReunionController {
     @Operation(summary = "Obtener reunión por ID", description = "permite obtener una reunión específica por ID")
 
     public ResponseEntity<ApiResponse<ReunionDTO>> buscarPorId (@RequestHeader("Authorization") String authHeader, @PathVariable Long id) {
-        String token = authHeader.replace("Bearer ", "");
-        ApiResponse<String> validationResponse = authService.validateToken(token);
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            ApiResponse<String> validationResponse = authService.validateToken(token);
 
-        if (validationResponse == null || validationResponse.getCode() != 200) {
-            ApiResponse<ReunionDTO> errorResponse =
-                new ApiResponse<>(401, "Token inválido", null);
-            return ResponseEntity.status(401).body(errorResponse);
+            if (validationResponse == null || validationResponse.getCode() != 200) {
+                ApiResponse<ReunionDTO> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+                return ResponseEntity.status(401).body(errorResponse);
+            }
+
+            ReunionDTO reunion = reunionService.getReunionById(id);
+            ApiResponse<ReunionDTO> response =
+                    new ApiResponse<>(200, "Reunión encontrada", reunion);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ApiResponse<ReunionDTO> response = new ApiResponse<>(500, "Error al buscar reunión: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
         }
-
-        ReunionDTO reunion = reunionService.getReunionById(id);
-        ApiResponse<ReunionDTO> response =
-                new ApiResponse<>(200, "Reunión encontrada", reunion);
-        return ResponseEntity.ok(response);
     }
 
     // * Método Crear Reunión Nueva * //
@@ -70,19 +79,24 @@ public class ReunionController {
     @Operation(summary = "Crear una nueva reunión", description = "Permite crear una nueva reunión")
 
     public ResponseEntity<ApiResponse<ReunionDTO>> createReunion (@RequestHeader("Authorization") String authHeader, @Valid @RequestBody ReunionDTO dto){
-        String token = authHeader.replace("Bearer ", "");
-        ApiResponse<String> validationResponse = authService.validateToken(token);
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            ApiResponse<String> validationResponse = authService.validateToken(token);
 
-        if (validationResponse == null || validationResponse.getCode() != 200) {
-            ApiResponse<ReunionDTO> errorResponse =
-                new ApiResponse<>(401, "Token inválido", null);
-            return ResponseEntity.status(401).body(errorResponse);
+            if (validationResponse == null || validationResponse.getCode() != 200) {
+                ApiResponse<ReunionDTO> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+                return ResponseEntity.status(401).body(errorResponse);
+            }
+            
+            ReunionDTO created = reunionService.createReunion(dto);
+            ApiResponse<ReunionDTO> response =
+                new ApiResponse<>(201, "Reunión creada", created);
+            return ResponseEntity.status(201).body(response);
+        } catch (Exception e) {
+            ApiResponse<ReunionDTO> response = new ApiResponse<>(500, "Error al crear reunión: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
         }
-        
-        ReunionDTO created = reunionService.createReunion(dto);
-        ApiResponse<ReunionDTO> response =
-            new ApiResponse<>(201, "Reunión creada", created);
-        return ResponseEntity.status(201).body(response);
 
     }
 
@@ -92,20 +106,24 @@ public class ReunionController {
     @Operation(summary = "Actualizar una reunión existente", description = "Permite actualizar una reunión ya creada")
 
     public ResponseEntity<ApiResponse<ReunionDTO>> updateReunion (@RequestHeader("Authorization") String authHeader, @Valid @RequestBody ReunionDTO dto, @PathVariable Long id){
-            
-        String token = authHeader.replace("Bearer ", "");
-        ApiResponse<String> validationResponse = authService.validateToken(token);
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            ApiResponse<String> validationResponse = authService.validateToken(token);
 
-        if (validationResponse == null || validationResponse.getCode() != 200) {
-            ApiResponse<ReunionDTO> errorResponse =
-                new ApiResponse<>(401, "Token inválido", null);
-            return ResponseEntity.status(401).body(errorResponse);
+            if (validationResponse == null || validationResponse.getCode() != 200) {
+                ApiResponse<ReunionDTO> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+                return ResponseEntity.status(401).body(errorResponse);
+            }
+            
+            ReunionDTO updated = reunionService.updateReunion(id, dto);
+            ApiResponse<ReunionDTO> response =
+                    new ApiResponse<>(200, "Reunión actualizada", updated);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ApiResponse<ReunionDTO> response = new ApiResponse<>(500, "Error al actualizar reunión: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
         }
-        
-        ReunionDTO updated = reunionService.updateReunion(id, dto);
-        ApiResponse<ReunionDTO> response =
-                new ApiResponse<>(200, "Reunión actualizada", updated);
-        return ResponseEntity.ok(response);
     }
 
     // * Método Eliminar Reunión * //
@@ -114,18 +132,23 @@ public class ReunionController {
     @Operation(summary = "Eliminar una reunión", description = "Eliminar una reunión existente")
 
     public ResponseEntity<ApiResponse<Void>> updateReunion (@PathVariable Long id, @RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.replace("Bearer ", "");
-        ApiResponse<String> validationResponse = authService.validateToken(token);
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            ApiResponse<String> validationResponse = authService.validateToken(token);
 
-        if (validationResponse == null || validationResponse.getCode() != 200) {
-            ApiResponse<Void> errorResponse =
-                new ApiResponse<>(401, "Token inválido", null);
-            return ResponseEntity.status(401).body(errorResponse);
+            if (validationResponse == null || validationResponse.getCode() != 200) {
+                ApiResponse<Void> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+                return ResponseEntity.status(401).body(errorResponse);
+            }
+
+            reunionService.deleteReunion(id);
+            ApiResponse<Void> response =
+                    new ApiResponse<>(200, "Reunión eliminada", null);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ApiResponse<Void> response = new ApiResponse<>(500, "Error al eliminar reunión: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
         }
-
-        reunionService.deleteReunion(id);
-        ApiResponse<Void> response =
-                new ApiResponse<>(200, "Reunión eliminada", null);
-        return ResponseEntity.ok(response);
     }
 }

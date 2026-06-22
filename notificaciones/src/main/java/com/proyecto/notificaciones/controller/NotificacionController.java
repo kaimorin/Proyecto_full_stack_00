@@ -22,29 +22,45 @@ public class NotificacionController {
     @GetMapping
     @Operation(summary = "Listar todas las notificaciones", description = "Permite obtener un listado completo de todas las notificaciones registradas")
     public ResponseEntity<List<NotificacionDto>> listarTodos() {
-        return ResponseEntity.ok(service.listarTodos());
+        try {
+            return ResponseEntity.ok(service.listarTodos());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtener notificación por ID", description = "Permite buscar una notificación específica mediante su identificador único")
     public ResponseEntity<NotificacionDto> obtenerPorId(@PathVariable Long id) {
-        return service.obtenerPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            return service.obtenerPorId(id)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @GetMapping("/origen")
     @Operation(summary = "Obtener notificación por origen", description = "Permite buscar notificaciones filtrándolas por el nombre del sistema u origen que las generó")
     public ResponseEntity<NotificacionDto> obtenerPorOrigen(@PathVariable String origen) {
-        return service.obtenerPorOrigen(origen)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            return service.obtenerPorOrigen(origen)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @PostMapping
     @Operation(summary = "Crear nueva notificación", description = "Permite registrar una nueva notificación dentro del sistema")
     public ResponseEntity<NotificacionDto> crear(@RequestBody NotificacionDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @PutMapping("/{id}")

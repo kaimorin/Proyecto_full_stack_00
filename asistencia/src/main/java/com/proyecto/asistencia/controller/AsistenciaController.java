@@ -27,20 +27,24 @@ public class AsistenciaController {
 
     @Operation(summary = "Obtener todas las asistencias")
     public ResponseEntity<ApiResponse<List<AsistenciaDTO>>> getAllAsistencias(@RequestHeader("Authorization") String authHeader) {
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            ApiResponse<String> validationResponse = authService.validateToken(token);
 
-        String token = authHeader.replace("Bearer ", "");
-        ApiResponse<String> validationResponse = authService.validateToken(token);
+            if (validationResponse == null || validationResponse.getCode() != 200) {
+                ApiResponse<List<AsistenciaDTO>> errorResponse =
+                        new ApiResponse<>(401, "Token inválido", null);
+                return ResponseEntity.status(401).body(errorResponse);
+            }
 
-        if (validationResponse == null || validationResponse.getCode() != 200) {
-            ApiResponse<List<AsistenciaDTO>> errorResponse =
-                    new ApiResponse<>(401, "Token inválido", null);
-            return ResponseEntity.status(401).body(errorResponse);
+            List<AsistenciaDTO> asistencias = asistenciaService.getAllAsistenciasDTO();
+            ApiResponse<List<AsistenciaDTO>> response =
+                    new ApiResponse<>(200, "Listado de asistencias", asistencias);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ApiResponse<List<AsistenciaDTO>> response = new ApiResponse<>(500, "Error al listar asistencias: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
         }
-
-        List<AsistenciaDTO> asistencias = asistenciaService.getAllAsistenciasDTO();
-        ApiResponse<List<AsistenciaDTO>> response =
-                new ApiResponse<>(200, "Listado de asistencias", asistencias);
-        return ResponseEntity.ok(response);
     }
 
     // * Método Obtener Asistencia por ID * //
@@ -49,19 +53,24 @@ public class AsistenciaController {
     @Operation(summary = "Obtener asistencia por ID")
 
     public ResponseEntity<ApiResponse<AsistenciaDTO>> getAsistenciaById(@RequestHeader("Authorization") String authHeader, @PathVariable Long id) {
-        String token = authHeader.replace("Bearer ", "");
-        ApiResponse<String> validationResponse = authService.validateToken(token);
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            ApiResponse<String> validationResponse = authService.validateToken(token);
 
-        if (validationResponse == null || validationResponse.getCode() != 200) {
-            ApiResponse<AsistenciaDTO> errorResponse =
-                new ApiResponse<>(401, "Token inválido", null);
-            return ResponseEntity.status(401).body(errorResponse);
+            if (validationResponse == null || validationResponse.getCode() != 200) {
+                ApiResponse<AsistenciaDTO> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+                return ResponseEntity.status(401).body(errorResponse);
+            }
+
+            AsistenciaDTO asistencia = asistenciaService.getAsistenciaById(id);
+            ApiResponse<AsistenciaDTO> response =
+                    new ApiResponse<>(200, "Asistencia encontrada", asistencia);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ApiResponse<AsistenciaDTO> response = new ApiResponse<>(500, "Error al obtener asistencia: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
         }
-
-        AsistenciaDTO asistencia = asistenciaService.getAsistenciaById(id);
-        ApiResponse<AsistenciaDTO> response =
-                new ApiResponse<>(200, "Asistencia encontrada", asistencia);
-        return ResponseEntity.ok(response);
     }
 
     // * Método Crear Asistencia Nueva * //
@@ -70,19 +79,24 @@ public class AsistenciaController {
     @Operation(summary = "Crear nueva asistencia")
 
     public ResponseEntity<ApiResponse<AsistenciaDTO>> createAsistencia(@RequestHeader("Authorization") String authHeader, @Valid @RequestBody AsistenciaDTO dto){
-        String token = authHeader.replace("Bearer ", "");
-        ApiResponse<String> validationResponse = authService.validateToken(token);
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            ApiResponse<String> validationResponse = authService.validateToken(token);
 
-        if (validationResponse == null || validationResponse.getCode() != 200) {
-            ApiResponse<AsistenciaDTO> errorResponse =
-                new ApiResponse<>(401, "Token inválido", null);
-            return ResponseEntity.status(401).body(errorResponse);
+            if (validationResponse == null || validationResponse.getCode() != 200) {
+                ApiResponse<AsistenciaDTO> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+                return ResponseEntity.status(401).body(errorResponse);
+            }
+
+            AsistenciaDTO created = asistenciaService.createAsistencia(dto);
+            ApiResponse<AsistenciaDTO> response =
+                new ApiResponse<>(201, "Creado estado de asistencia", created);
+            return ResponseEntity.status(201).body(response);
+        } catch (Exception e) {
+            ApiResponse<AsistenciaDTO> response = new ApiResponse<>(500, "Error al crear asistencia: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
         }
-
-        AsistenciaDTO created = asistenciaService.createAsistencia(dto);
-        ApiResponse<AsistenciaDTO> response =
-            new ApiResponse<>(201, "Creado estado de asistencia", created);
-        return ResponseEntity.status(201).body(response);
 
     }
 
@@ -92,19 +106,23 @@ public class AsistenciaController {
     @Operation(summary = "Actualizar asistencia")
 
     public ResponseEntity<ApiResponse<AsistenciaDTO>> updateAsistencia(@RequestHeader("Authorization") String authHeader, @Valid @RequestBody AsistenciaDTO dto, @PathVariable Long id){
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            ApiResponse<String> validationResponse = authService.validateToken(token);
 
-        String token = authHeader.replace("Bearer ", "");
-        ApiResponse<String> validationResponse = authService.validateToken(token);
+            if (validationResponse == null || validationResponse.getCode() != 200) {
+                ApiResponse<AsistenciaDTO> errorResponse =
+                    new ApiResponse<>(401, "Token inválido", null);
+                return ResponseEntity.status(401).body(errorResponse);
+            }
 
-        if (validationResponse == null || validationResponse.getCode() != 200) {
-            ApiResponse<AsistenciaDTO> errorResponse =
-                new ApiResponse<>(401, "Token inválido", null);
-            return ResponseEntity.status(401).body(errorResponse);
+            AsistenciaDTO updated = asistenciaService.updateAsistencia(id, dto);
+            ApiResponse<AsistenciaDTO> response =
+                    new ApiResponse<>(200, "Estado de asistencia actualizado", updated);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ApiResponse<AsistenciaDTO> response = new ApiResponse<>(500, "Error al actualizar asistencia: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
         }
-
-        AsistenciaDTO updated = asistenciaService.updateAsistencia(id, dto);
-        ApiResponse<AsistenciaDTO> response =
-                new ApiResponse<>(200, "Estado de asistencia actualizado", updated);
-        return ResponseEntity.ok(response);
     }
 }

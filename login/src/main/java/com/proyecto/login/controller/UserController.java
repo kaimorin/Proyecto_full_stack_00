@@ -52,40 +52,58 @@ public class UserController {
     @PostMapping("/login")
     @Operation(summary = "Iniciar sesión", description = "Valida las credenciales del usuario y permite el acceso")
     public ResponseEntity<ApiResponse<String>> login(@Valid @RequestBody UserCredentialsDTO dto) {
-        String token = userService.login(dto.getUsername(), dto.getPassword());
+        try {
+            String token = userService.login(dto.getUsername(), dto.getPassword());
 
-        if (token != null) {
-            ApiResponse<String> response =
-                    new ApiResponse<>(200, "Login exitoso", token);
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<String> response =
-                    new ApiResponse<>(401, "Credenciales inválidas", null);
-            return ResponseEntity.status(401).body(response);
+            if (token != null) {
+                ApiResponse<String> response =
+                        new ApiResponse<>(200, "Login exitoso", token);
+                return ResponseEntity.ok(response);
+            } else {
+                ApiResponse<String> response =
+                        new ApiResponse<>(401, "Credenciales inválidas", null);
+                return ResponseEntity.status(401).body(response);
+            }
+        } catch (Exception e) {
+            logger.error("Error al iniciar sesión: {}", e.getMessage());
+            ApiResponse<String> response = new ApiResponse<>(400, "Error al iniciar sesión: " + e.getMessage(), null);
+            return ResponseEntity.badRequest().body(response);
         }
     }
 
     @GetMapping("/list")
     @Operation(summary = "Listar usuarios", description = "Obtiene una lista de todos los usuarios registrados")
     public ResponseEntity<ApiResponse<List<UserDTO>>> getAllUsers() {
-        List<UserDTO> users = userService.getAllUsersDTO();
-        ApiResponse<List<UserDTO>> response =
-                new ApiResponse<>(200, "Listado de usuarios", users);
-        return ResponseEntity.ok(response);
+        try {
+            List<UserDTO> users = userService.getAllUsersDTO();
+            ApiResponse<List<UserDTO>> response =
+                    new ApiResponse<>(200, "Listado de usuarios", users);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            logger.error("Error al listar usuarios: {}", e.getMessage());
+            ApiResponse<List<UserDTO>> response = new ApiResponse<>(500, "Error al listar usuarios: " + e.getMessage(), null);
+            return ResponseEntity.status(500).body(response);
+        }
     }
      @GetMapping("/validate")
     @Operation(summary = "Validar token", description = "Permite validar un token de autenticación para verificar su validez.")
     public ResponseEntity<ApiResponse<String>> validateToken(@RequestParam String token) {
-        boolean valid = userService.validateToken(token);
+        try {
+            boolean valid = userService.validateToken(token);
 
-        if (valid) {
-            ApiResponse<String> response =
-                    new ApiResponse<>(200, "Token válido", "OK");
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<String> response =
-                    new ApiResponse<>(401, "Token inválido", null);
-            return ResponseEntity.status(401).body(response);
+            if (valid) {
+                ApiResponse<String> response =
+                        new ApiResponse<>(200, "Token válido", "OK");
+                return ResponseEntity.ok(response);
+            } else {
+                ApiResponse<String> response =
+                        new ApiResponse<>(401, "Token inválido", null);
+                return ResponseEntity.status(401).body(response);
+            }
+        } catch (Exception e) {
+            logger.error("Error al validar token: {}", e.getMessage());
+            ApiResponse<String> response = new ApiResponse<>(400, "Error al validar token: " + e.getMessage(), null);
+            return ResponseEntity.badRequest().body(response);
         }
     }
 
