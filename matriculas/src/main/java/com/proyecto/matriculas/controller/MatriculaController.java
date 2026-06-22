@@ -45,6 +45,7 @@ public class MatriculaController {
                     new ApiResponse<>(200, "Listado de matrículas", matriculas);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
+            logger.error("Error al listar matrículas: {}", e.getMessage());
             ApiResponse<List<MatriculaDTO>> response = new ApiResponse<>(500, "Error al listar matrículas: " + e.getMessage(), null);
             return ResponseEntity.status(500).body(response);
         }
